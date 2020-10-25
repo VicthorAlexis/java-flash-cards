@@ -22,42 +22,32 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author felip
  */
-public class Layout extends javax.swing.JFrame {
+public class TelaInicial extends javax.swing.JFrame {
     private boolean tfClicked = false;
     DefaultListModel mod = new DefaultListModel();
     
     /**
      * Creates new form Layout
      */
-    public Layout() {
+    public TelaInicial() {
         initComponents();
         jPanel1.requestFocus();
         
         txtAdicionar.setForeground(java.awt.Color.GRAY);
         txtAdicionar.setText("Adicionar Deque");
         
-        // habilitar botões se um item estiver selecionado
-        lstDeque.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (lstDeque.getSelectedValue() != null) {
-                    btnAcessar.setEnabled(true);
-                    btnRenomear.setEnabled(true);
-                    btnExcluir.setEnabled(true);
-                }
+        // habilitar ou desabilitar botões se um item estiver selecionado ou nao
+        lstDeque.addListSelectionListener((ListSelectionEvent e) -> {
+            if (lstDeque.getSelectedValue() != null) {
+                btnAcessar.setEnabled(true);
+                btnRenomear.setEnabled(true);
+                btnExcluir.setEnabled(true);
+            } else {
+                btnAcessar.setEnabled(false);
+                btnRenomear.setEnabled(false);
+                btnExcluir.setEnabled(false);
             }
         });
-        
-        // clicar duas vezes no item da lista = pressionar btnAcessar
-        lstDeque.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getClickCount() == 2) {
-                    btnAcessar.doClick();
-                }
-            }
-        });
-        
     }
 
     /**
@@ -130,6 +120,11 @@ public class Layout extends javax.swing.JFrame {
 
         btnAcessar.setText("Acessar");
         btnAcessar.setEnabled(false);
+        btnAcessar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcessarActionPerformed(evt);
+            }
+        });
 
         btnRenomear.setText("Renomear");
         btnRenomear.setEnabled(false);
@@ -144,13 +139,13 @@ public class Layout extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(140, 140, 140)
+                .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addComponent(btnRenomear)
-                .addGap(54, 54, 54)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
@@ -175,7 +170,7 @@ public class Layout extends javax.swing.JFrame {
                 .addComponent(txtAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+                .addGap(166, 166, 166))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,7 +209,6 @@ public class Layout extends javax.swing.JFrame {
 
     
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        
         // adicionar deque na lista se o usuário digitou algo
         lstDeque.setModel(mod);
         if (!txtAdicionar.getText().equals("") && txtAdicionar.getForeground() != Color.GRAY) {
@@ -252,12 +246,16 @@ public class Layout extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Warning", JOptionPane.YES_NO_OPTION);
-        if(dialogResult == JOptionPane.YES_OPTION){
+        if (dialogResult == JOptionPane.YES_OPTION){
             int index = lstDeque.getSelectionModel().getMaxSelectionIndex();
             mod.remove(index);
         }
 
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAcessarActionPerformed
 
     private void jPanelMouseClicked(javax.swing.JPanel jPanel) {
         jPanel.requestFocus();
@@ -284,20 +282,21 @@ public class Layout extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Layout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Layout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Layout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Layout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Layout().setVisible(true);
+                new TelaInicial().setVisible(true);
             }
         });
     }
