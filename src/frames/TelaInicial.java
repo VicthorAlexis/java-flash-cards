@@ -48,7 +48,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 btnExcluir.setEnabled(false);
             }
         });
-
     }
 
     /**
