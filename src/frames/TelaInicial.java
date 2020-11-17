@@ -108,6 +108,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        lstDeque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstDequeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstDeque);
 
         btnExcluir.setText("Excluir");
@@ -145,7 +150,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(btnRenomear)
                 .addGap(56, 56, 56)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
@@ -214,6 +219,9 @@ public class TelaInicial extends javax.swing.JFrame {
         if (!txtAdicionar.getText().equals("") && txtAdicionar.getForeground() != Color.GRAY) {
             lstDeque.setFixedCellHeight(30);
             mod.addElement(txtAdicionar.getText().trim());
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo não preenchido!",
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
         }
         
         // retornar com texto placeholder
@@ -254,8 +262,12 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-        // TODO add your handling code here:
+        new TelaDeck().setVisible(true);
     }//GEN-LAST:event_btnAcessarActionPerformed
+
+    private void lstDequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstDequeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lstDequeMouseClicked
 
     private void jPanelMouseClicked(javax.swing.JPanel jPanel) {
         jPanel.requestFocus();
