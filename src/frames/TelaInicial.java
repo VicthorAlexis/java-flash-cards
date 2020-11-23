@@ -1,8 +1,10 @@
 package frames;
 
+import flashcards.Deck;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -23,13 +25,14 @@ import javax.swing.event.ListSelectionListener;
  * @author felip
  */
 public class TelaInicial extends javax.swing.JFrame {
+    ArrayList<Deck> decks;
     private boolean tfClicked = false;
     DefaultListModel mod = new DefaultListModel();
-    
     /**
      * Creates new form Layout
      */
     public TelaInicial() {
+        decks = new ArrayList<Deck>();
         initComponents();
         jPanel1.requestFocus();
         
@@ -49,6 +52,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -218,6 +222,9 @@ public class TelaInicial extends javax.swing.JFrame {
         lstDeque.setModel(mod);
         if (!txtAdicionar.getText().equals("") && txtAdicionar.getForeground() != Color.GRAY) {
             lstDeque.setFixedCellHeight(30);
+            String nomeDeck = txtAdicionar.getText().trim();
+            decks.add(new Deck(nomeDeck));
+            mod.addElement(nomeDeck);
             mod.addElement(txtAdicionar.getText().trim());
         } else {
             JOptionPane.showMessageDialog(null, "Campo não preenchido!",
@@ -248,6 +255,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 mod.remove(index);
                 mod.add(index, newitem);
                 lstDeque.getSelectionModel().setLeadSelectionIndex(index);
+                decks.set(index, new Deck(newitem));
             }
         }
     }//GEN-LAST:event_btnRenomearActionPerformed
@@ -262,6 +270,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
+        int index = lstDeque.getSelectionModel().getMaxSelectionIndex();
+        new TelaDeck(decks.get(index).getNome()).setVisible(true);
         new TelaDeck().setVisible(true);
     }//GEN-LAST:event_btnAcessarActionPerformed
 
