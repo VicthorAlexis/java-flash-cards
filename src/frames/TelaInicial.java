@@ -53,7 +53,6 @@ public class TelaInicial extends javax.swing.JFrame {
         });
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -225,7 +224,6 @@ public class TelaInicial extends javax.swing.JFrame {
             String nomeDeck = txtAdicionar.getText().trim();
             decks.add(new Deck(nomeDeck));
             mod.addElement(nomeDeck);
-            mod.addElement(txtAdicionar.getText().trim());
         } else {
             JOptionPane.showMessageDialog(null, "Campo não preenchido!",
                         "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -255,7 +253,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 mod.remove(index);
                 mod.add(index, newitem);
                 lstDeque.getSelectionModel().setLeadSelectionIndex(index);
-                decks.set(index, new Deck(newitem));
             }
         }
     }//GEN-LAST:event_btnRenomearActionPerformed
@@ -272,7 +269,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         int index = lstDeque.getSelectionModel().getMaxSelectionIndex();
         new TelaDeck(decks.get(index).getNome()).setVisible(true);
-        new TelaDeck().setVisible(true);
     }//GEN-LAST:event_btnAcessarActionPerformed
 
     private void lstDequeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstDequeMouseClicked

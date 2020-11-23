@@ -9,7 +9,6 @@ import flashcards.Card;
 import flashcards.Deck;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -50,13 +49,6 @@ public class TelaDeck extends javax.swing.JFrame {
         this.nomeDeck = nomeDeck;
         deck = new Deck(nomeDeck);
         
-    private boolean tfClicked = false;
-    private boolean tfClicked2 = false;
-    DefaultListModel mod = new DefaultListModel();
-    /**
-     * Creates new form TelaDeck
-     */
-    public TelaDeck() {
         initComponents();
         
         txtFrente.setForeground(java.awt.Color.GRAY);
@@ -75,13 +67,6 @@ public class TelaDeck extends javax.swing.JFrame {
                 setAcertoErroLabels(index);
             } else {
                 setEnabledBtnLbl(false);
-                btnEstudar.setEnabled(true);
-                btnModificar.setEnabled(true);
-                btnExcluir.setEnabled(true);
-            } else {
-                btnEstudar.setEnabled(false);
-                btnModificar.setEnabled(false);
-                btnExcluir.setEnabled(false);
             }
         });
     }
@@ -130,29 +115,6 @@ public class TelaDeck extends javax.swing.JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPanel1MousePressed(evt);
             }
-        jPanel1 = new javax.swing.JPanel();
-        btnEstudar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstCards = new javax.swing.JList<>();
-        btnExcluir = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
-        txtFrente = new javax.swing.JTextField();
-        btnAdicionar = new javax.swing.JButton();
-        txtVerso = new javax.swing.JTextField();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tela deck");
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/deck.png")).getImage());
-
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
-            }
         });
 
         btnEstudar.setText("Estudar");
@@ -168,8 +130,6 @@ public class TelaDeck extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-
-        jScrollPane1.setViewportView(lstCards);
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +190,8 @@ public class TelaDeck extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(lblAcertos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNumAcertos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblNumAcertos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lblData)
@@ -279,19 +240,6 @@ public class TelaDeck extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(btnEstudar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,18 +257,6 @@ public class TelaDeck extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEstudar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel2MouseClicked(evt);
@@ -335,14 +271,6 @@ public class TelaDeck extends javax.swing.JFrame {
         txtFrente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFrenteActionPerformed(evt);
-            }
-        });
-
-        btnAdicionar.setIcon(new javax.swing.ImageIcon("C:\\Users\\odijovi\\java-flash-cards\\src\\images\\add.png")); // NOI18N
-        btnAdicionar.setText("Adicionar Card");
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
             }
         });
 
@@ -375,29 +303,20 @@ public class TelaDeck extends javax.swing.JFrame {
                     .addComponent(txtVerso))
                 .addGap(79, 79, 79))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(235, 235, 235)
+                .addGap(236, 236, 236)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFrente, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(41, 41, 41)
-                            .addComponent(txtVerso, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(222, 222, 222)
-                            .addComponent(btnAdicionar))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(49, 49, 49)
                 .addComponent(txtFrente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtVerso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -405,7 +324,10 @@ public class TelaDeck extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,13 +336,6 @@ public class TelaDeck extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap()
-                .addComponent(txtFrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtVerso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -434,17 +349,6 @@ public class TelaDeck extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -484,20 +388,6 @@ public class TelaDeck extends javax.swing.JFrame {
             }
         }
         
-        String text1 = JOptionPane.showInputDialog("Renomear frente", mod.getElementAt(index));
-        //String text2 = JOptionPane.showInputDialog("Renomear Verso", ?);
-        
-        if (text1 != null) {
-            String newitem = text1.trim();
-            if (!newitem.isEmpty()) {
-                mod.remove(index);
-                mod.add(index, newitem);
-                lstCards.getSelectionModel().setLeadSelectionIndex(index);
-            }
-        }
-        
-        // Atribuir verso a um objeto Card
-        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -526,11 +416,6 @@ public class TelaDeck extends javax.swing.JFrame {
     private void txtVersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVersoActionPerformed
         btnAdicionar.doClick();
         btnAdicionar.requestFocus();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFrenteActionPerformed
-
-    private void txtVersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVersoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtVersoActionPerformed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
@@ -569,13 +454,6 @@ public class TelaDeck extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos",
                         "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
-            mod.addElement(txtFrente.getText().trim());
-            
-            // Só a frente vai aparecer na lista.
-            // Adicionar verso no card!
-        } else {
-            JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos",
-                        "Aviso", JOptionPane.WARNING_MESSAGE);
         }
         
         // retornar com texto placeholder
@@ -635,7 +513,6 @@ public class TelaDeck extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaDeck("").setVisible(true);
-                new TelaDeck().setVisible(true);
             }
         });
     }
@@ -659,8 +536,6 @@ public class TelaDeck extends javax.swing.JFrame {
     private javax.swing.JLabel lblMostraData;
     private javax.swing.JLabel lblNumAcertos;
     private javax.swing.JLabel lblNumErros;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> lstCards;
     private javax.swing.JTextField txtFrente;
     private javax.swing.JTextField txtVerso;
