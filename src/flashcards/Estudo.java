@@ -17,7 +17,7 @@ public class Estudo {
     private final Queue<Card> filaCards; // fila de cards do deck
     private Card primeiroCard;  // card atual
     private int[] ordemCards;   // TODO controlar a ordem dos cards no deck
-    Iterator<Card> it;  // para mostrar o próximo card na fila
+    private Iterator<Card> it;  // para mostrar o próximo card na fila
     
     private Deck deck;
     // numero de acertos em estudo

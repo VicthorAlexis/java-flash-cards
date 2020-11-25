@@ -87,8 +87,11 @@ public class TelaDeck extends javax.swing.JFrame {
         atualizaCard();
         mostraFrente();
         lblTitulo.setText("FRENTE");
+        // mostrar card de tras apenas se houver mais de um card
         if (deck.getCards().size() == 1) {
             panelTras.setVisible(false);
+        } else {
+            panelTras.setVisible(true);
         }
         
         java.awt.Point panelFrentePosition = panelFrente.getLocation();
@@ -125,12 +128,13 @@ public class TelaDeck extends javax.swing.JFrame {
         btnExcluir.setEnabled(b);
         lblData.setEnabled(b);
         lblMostraData.setEnabled(b);
+      
         lblAcertos.setEnabled(b);
-        lblNumAcertos.setEnabled(b);
-        lblNumErros.setEnabled(b);
         lblErros.setEnabled(b);
+        lblNumAcertos.setEnabled(b); lblNumAcertos.setText("0");
+        lblNumErros.setEnabled(b); lblNumErros.setText("0");
         lblAproveitamento.setEnabled(b);
-        lblPorcentagem.setEnabled(b);
+        lblPorcentagem.setEnabled(b); lblPorcentagem.setText("0,0%");
     }
     
     // atualiza o numero de acertos e erros do card no historico
@@ -310,9 +314,9 @@ public class TelaDeck extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,7 +588,7 @@ public class TelaDeck extends javax.swing.JFrame {
             .addGroup(panelTrasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelTrasLayout.setVerticalGroup(
             panelTrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,22 +605,22 @@ public class TelaDeck extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(162, 162, 162)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap(153, Short.MAX_VALUE)
                 .addComponent(panelFrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGap(160, 160, 160))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(159, Short.MAX_VALUE)
+                    .addContainerGap(167, Short.MAX_VALUE)
                     .addComponent(panelTras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(155, Short.MAX_VALUE)))
+                    .addContainerGap(151, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(63, 63, 63)
                 .addComponent(panelFrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap(58, Short.MAX_VALUE)
@@ -649,7 +653,7 @@ public class TelaDeck extends javax.swing.JFrame {
                 .addComponent(btnAcertei, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(btnErrei, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -668,8 +672,8 @@ public class TelaDeck extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelEstudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelEstudoLayout.createSequentialGroup()
-                    .addComponent(jLayeredPane1)
-                    .addContainerGap()))
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 19, Short.MAX_VALUE)))
         );
         panelEstudoLayout.setVerticalGroup(
             panelEstudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
