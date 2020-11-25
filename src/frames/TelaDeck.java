@@ -19,14 +19,13 @@ import javax.swing.event.ListSelectionEvent;
  * @author Victhor
  */
 public class TelaDeck extends javax.swing.JFrame {  
-    private String nomeDeck;
+    private static String nomeDeck = "";
     private Deck deck;
     private boolean tfClicked = false;
     private boolean tfClicked2 = false;
     DefaultListModel mod = new DefaultListModel();
     
     private void setEnabledBtnLbl(boolean b) {
-        btnEstudar.setEnabled(b);
         btnModificar.setEnabled(b);
         btnExcluir.setEnabled(b);
         lblData.setEnabled(b);
@@ -37,9 +36,12 @@ public class TelaDeck extends javax.swing.JFrame {
         lblErros.setEnabled(b);
     }
     
-    private void setAcertoErroLabels(int index) {
-        lblNumAcertos.setText("" + deck.getCards().get(index).getNumAcertos());
-        lblNumErros.setText("" + deck.getCards().get(index).getNumErros());
+    // atualiza o numero de acertos e erros do card no historico
+    public void setAcertoErroLabels(int index) {
+        if (index >= 0) {
+            lblNumAcertos.setText("" + deck.getCards().get(index).getNumAcertos());
+            lblNumErros.setText("" + deck.getCards().get(index).getNumErros());
+        }
     }
 
     /**
@@ -57,6 +59,7 @@ public class TelaDeck extends javax.swing.JFrame {
         txtVerso.setText("Adicionar verso do card (significado)");
         
         // Desabilitar botões e labels
+        btnEstudar.setEnabled(false);
         setEnabledBtnLbl(false);
         
         // habilitar ou desabilitar botões se um item estiver selecionado ou nao
@@ -65,6 +68,7 @@ public class TelaDeck extends javax.swing.JFrame {
                 setEnabledBtnLbl(true);
                 int index = lstCards.getSelectionModel().getMaxSelectionIndex();
                 setAcertoErroLabels(index);
+                System.out.println(index);
             } else {
                 setEnabledBtnLbl(false);
             }
@@ -141,6 +145,11 @@ public class TelaDeck extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(245, 245, 245));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cards do Deck '" + nomeDeck + "'"));
 
+        lstCards.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstCardsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstCards);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -190,8 +199,7 @@ public class TelaDeck extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(lblAcertos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNumAcertos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(lblNumAcertos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lblData)
@@ -324,10 +332,7 @@ public class TelaDeck extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,15 +361,15 @@ public class TelaDeck extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudarActionPerformed
-        // TODO add your handling code here:
+        new TelaEstudar(deck).setVisible(true);
     }//GEN-LAST:event_btnEstudarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // indice do ultimo item selecionado
         int index = lstCards.getSelectionModel().getMaxSelectionIndex();
         
-        javax.swing.JTextField tfFrente = new javax.swing.JTextField();
-        javax.swing.JTextField tfVerso = new javax.swing.JTextField();
+        javax.swing.JTextField tfFrente = new javax.swing.JTextField(deck.getCards().get(index).getFrente());
+        javax.swing.JTextField tfVerso = new javax.swing.JTextField(deck.getCards().get(index).getVerso());
         Object[] message = {
             "Frente:", tfFrente,
             "Verso:", tfVerso,
@@ -395,6 +400,10 @@ public class TelaDeck extends javax.swing.JFrame {
         if (dialogResult == JOptionPane.YES_OPTION){
             int index = lstCards.getSelectionModel().getMaxSelectionIndex();
             mod.remove(index);
+            deck.getCards().remove(index);
+            if (mod.getSize() == 0) {
+                btnEstudar.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -423,10 +432,14 @@ public class TelaDeck extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        int index = lstCards.getSelectionModel().getMaxSelectionIndex();
+        setAcertoErroLabels(index);
         jPanelMouseClicked(jPanel1);
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        int index = lstCards.getSelectionModel().getMaxSelectionIndex();
+        setAcertoErroLabels(index);
         jPanelMouseClicked(jPanel2);
     }//GEN-LAST:event_jPanel2MouseClicked
 
@@ -450,6 +463,7 @@ public class TelaDeck extends javax.swing.JFrame {
             mod.addElement(frente); // Só a frente vai aparecer na lista.
             
             deck.addCard(new Card(frente, verso));
+            btnEstudar.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos",
                         "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -465,6 +479,11 @@ public class TelaDeck extends javax.swing.JFrame {
         tfClicked = false;
         tfClicked2 = false;
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void lstCardsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCardsMouseClicked
+        int index = lstCards.getSelectionModel().getMaxSelectionIndex();
+        setAcertoErroLabels(index);
+    }//GEN-LAST:event_lstCardsMouseClicked
     
     private void jPanelMouseClicked(javax.swing.JPanel jPanel) {
         jPanel.requestFocus();
@@ -512,7 +531,7 @@ public class TelaDeck extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaDeck("").setVisible(true);
+                new TelaDeck(nomeDeck).setVisible(true);
             }
         });
     }
