@@ -107,6 +107,7 @@ public class TelaDeck extends javax.swing.JFrame {
                 panelFrente.setLocation(p);
                 
             } else {
+                mostraFrente();
                 if (deck.getCards().size() - idxAtual == 1)
                     panelTras.setVisible(false);    // nao mostrar o próximo card (panelTras) caso ele nao exista
                 else if (deck.getCards().size() - idxAtual == 0) {
@@ -155,7 +156,7 @@ public class TelaDeck extends javax.swing.JFrame {
         String htmlFinal = "</html></body>";
         
         String txt = s;
-        int limit = 35; // quantidade de caracteres por linha
+        int limit = 38; // quantidade de caracteres por linha
         if (length > limit) {
             StringBuilder txtHTML = new StringBuilder(htmlInit + s + htmlFinal);
             for (int i = limit + htmlInit.length(); i >= 0; i--) {
@@ -523,7 +524,7 @@ public class TelaDeck extends javax.swing.JFrame {
 
         getContentPane().add(panelDeck, "card2");
 
-        jLayeredPane1.setBackground(new java.awt.Color(245, 245, 245));
+        jLayeredPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         panelFrente.setBackground(new java.awt.Color(255, 255, 255));
         panelFrente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 255), 2, true));
@@ -554,7 +555,7 @@ public class TelaDeck extends javax.swing.JFrame {
                 .addGroup(panelFrenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFrenteLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblCard2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+                        .addComponent(lblCard2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
                     .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addComponent(lblVerso, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -562,9 +563,9 @@ public class TelaDeck extends javax.swing.JFrame {
         panelFrenteLayout.setVerticalGroup(
             panelFrenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFrenteLayout.createSequentialGroup()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(lblCard2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                .addComponent(lblCard2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(lblVerso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -587,15 +588,15 @@ public class TelaDeck extends javax.swing.JFrame {
             panelTrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTrasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblCard1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelTrasLayout.setVerticalGroup(
             panelTrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTrasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblCard1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLayeredPane1.setLayer(panelFrente, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -606,38 +607,54 @@ public class TelaDeck extends javax.swing.JFrame {
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addComponent(panelFrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160))
+                .addGap(121, 121, 121))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(167, Short.MAX_VALUE)
+                    .addContainerGap(135, Short.MAX_VALUE)
                     .addComponent(panelTras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(151, Short.MAX_VALUE)))
+                    .addContainerGap(116, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addComponent(panelFrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(58, Short.MAX_VALUE)
+                    .addContainerGap(56, Short.MAX_VALUE)
                     .addComponent(panelTras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(109, Short.MAX_VALUE)))
+                    .addContainerGap(29, Short.MAX_VALUE)))
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnAcertei.setText("Acertei");
+        btnAcertei.setBackground(new java.awt.Color(245, 245, 245));
+        btnAcertei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/acertei.png"))); // NOI18N
+        btnAcertei.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAcerteiMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnAcerteiMouseReleased(evt);
+            }
+        });
         btnAcertei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcerteiActionPerformed(evt);
             }
         });
 
-        btnErrei.setText("Errei");
+        btnErrei.setBackground(new java.awt.Color(245, 245, 245));
+        btnErrei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/errei.png"))); // NOI18N
+        btnErrei.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnErreiMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnErreiMouseReleased(evt);
+            }
+        });
         btnErrei.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnErreiActionPerformed(evt);
@@ -649,20 +666,20 @@ public class TelaDeck extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(btnAcertei, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addComponent(btnErrei, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addGap(146, 146, 146)
+                .addComponent(btnErrei, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnAcertei, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcertei, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnErrei, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnErrei, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAcertei, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelEstudoLayout = new javax.swing.GroupLayout(panelEstudo);
@@ -671,19 +688,17 @@ public class TelaDeck extends javax.swing.JFrame {
             panelEstudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelEstudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelEstudoLayout.createSequentialGroup()
-                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 19, Short.MAX_VALUE)))
+                .addComponent(jLayeredPane1))
         );
         panelEstudoLayout.setVerticalGroup(
             panelEstudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstudoLayout.createSequentialGroup()
-                .addGap(0, 460, Short.MAX_VALUE)
+                .addGap(0, 405, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelEstudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelEstudoLayout.createSequentialGroup()
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 106, Short.MAX_VALUE)))
+                    .addGap(0, 141, Short.MAX_VALUE)))
         );
 
         getContentPane().add(panelEstudo, "card2");
@@ -894,17 +909,11 @@ public class TelaDeck extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblCard2lblCard2MouseClicked
 
-    private void btnAcerteiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcerteiActionPerformed
-        estudo.acertei(); // atualiza numero de acertos
-        apertaBotao();
-    }//GEN-LAST:event_btnAcerteiActionPerformed
-
     // apertou o botao acertei ou o botao errei
     private void apertaBotao() {
         if(!timer.isRunning()) timer.start();   // comecar a animacao
         
         if (atualizaCard() != null) {
-            mostraFrente();
             mostraFrente2();
         }
         idxAtual += 1;
@@ -947,6 +956,31 @@ public class TelaDeck extends javax.swing.JFrame {
         int index = lstCards.getSelectionModel().getMaxSelectionIndex();
         setAcertoErroLabels(index);
     }//GEN-LAST:event_btnRetornarActionPerformed
+
+    private void btnAcerteiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcerteiActionPerformed
+        estudo.acertei(); // atualiza numero de acertos
+        apertaBotao();
+    }//GEN-LAST:event_btnAcerteiActionPerformed
+
+    private void btnAcerteiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcerteiMousePressed
+        // Ao clicar no botão, mudar o ícone
+        btnAcertei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AcerteiPress.png")));
+    }//GEN-LAST:event_btnAcerteiMousePressed
+
+    private void btnErreiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnErreiMousePressed
+        // Ao clicar no botão, mudar o ícone
+        btnErrei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/erreiPress.png")));
+    }//GEN-LAST:event_btnErreiMousePressed
+
+    private void btnErreiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnErreiMouseReleased
+        // Ao soltar o botão, voltar à imagem original
+        btnErrei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/errei.png")));
+    }//GEN-LAST:event_btnErreiMouseReleased
+
+    private void btnAcerteiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcerteiMouseReleased
+        // Ao soltar o botão, voltar à imagem original
+        btnAcertei.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/acertei.png")));
+    }//GEN-LAST:event_btnAcerteiMouseReleased
     
     private void jPanelMouseClicked(javax.swing.JPanel jPanel) {
         jPanel.requestFocus();
