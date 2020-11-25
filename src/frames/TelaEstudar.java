@@ -97,6 +97,7 @@ public class TelaEstudar extends javax.swing.JFrame {
         return proximo;
     }
     
+    // vira o card
     private void mostraVerso() {
         Card c = estudo.getPrimeiroCard();
         if (c != null) {
@@ -303,27 +304,16 @@ public class TelaEstudar extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    
-    
-    public void animation() {
-        // start timer to provide state change and repaint
-        //Move every (approx) 5 milliseconds        
-
-    }
     
     
     private void btnAcerteiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcerteiActionPerformed
-        estudo.acertei();
+        estudo.acertei(); // atualiza numero de acertos
         apertaBotao();
     }//GEN-LAST:event_btnAcerteiActionPerformed
 
+    // apertou o botao acertei ou o botao errei
     private void apertaBotao() {
-        if(!timer.isRunning()) {
-            timer.start();
-        }
-        else
-            timer.stop();
+        if(!timer.isRunning()) timer.start();
         
         if (atualizaCard() != null) {
             mostraFrente();
@@ -333,7 +323,7 @@ public class TelaEstudar extends javax.swing.JFrame {
     }
     
     private void btnErreiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErreiActionPerformed
-        estudo.errei();
+        estudo.errei(); // atualiza numero de erros
         apertaBotao();
     }//GEN-LAST:event_btnErreiActionPerformed
 
@@ -342,6 +332,7 @@ public class TelaEstudar extends javax.swing.JFrame {
             cardFrente = false;
             mostraVerso();
             lblTitulo.setText("VERSO");
+            // detalhe no canto do card quando ele estiver mostrando o verso
             lblVerso.setBackground(new java.awt.Color(121,179,255));
         }
         else {
