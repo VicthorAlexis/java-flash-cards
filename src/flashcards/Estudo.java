@@ -14,13 +14,18 @@ import java.util.Queue;
  * @author felip
  */
 public class Estudo {
-    private final Queue<Card> filaCards; // fila de cards do deck 
-    private Card primeiroCard;
-    private int[] ordemCards;   // controla a ordem dos cards no deck
-    Iterator<Card> it;
+    private final Queue<Card> filaCards; // fila de cards do deck
+    private Card primeiroCard;  // card atual
+    private int[] ordemCards;   // TODO controlar a ordem dos cards no deck
+    Iterator<Card> it;  // para mostrar o próximo card na fila
+    
+    private Deck deck;
+    // numero de acertos em estudo
+    private int numAcertos = 0;
     
     
     public Estudo(Deck deck) {
+        this.deck = deck;
         filaCards = new LinkedList<>(deck.getCards());
         it = filaCards.iterator();
     }
@@ -38,16 +43,22 @@ public class Estudo {
         return primeiroCard;
     }
     
-    // incrementa o número de acertos do card à mostra
+    // incrementa o número de acertos do card à mostra e do estudo
     public void acertei() {
+        numAcertos += 1;
         primeiroCard.setNumAcertos(primeiroCard.getNumAcertos() + 1);
     }
     
-    // incrementa o número de erros do card à mostra
+    // incrementa o número de erros do card à mostra e do estuo
     public void errei() {
         primeiroCard.setNumErros(primeiroCard.getNumErros() + 1);
     }
-    
-    
 
+    public int getNumAcertos() {
+        return numAcertos;
+    }
+    
+    public Estudo novoEstudo() {
+        return new Estudo(deck);
+    }
 }

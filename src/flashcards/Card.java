@@ -21,6 +21,12 @@ public class Card {
         this.numAcertos = 0;
         this.numErros = 0;
     }
+    
+    public float aproveitamento() {
+        if (numErros + numAcertos > 0)  // evitar divisao por zero
+            return (float)numAcertos/(float)(numErros + numAcertos);
+        return 0.0f;
+    }
 
     public String getFrente() {
         return frente;
@@ -53,6 +59,5 @@ public class Card {
     public void setNumErros(int numErros) {
         this.numErros = numErros;
     }
-    
     
 }
