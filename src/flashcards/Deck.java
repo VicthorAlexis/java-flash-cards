@@ -20,6 +20,10 @@ public class Deck {
         cards = new ArrayList<>();
     }
     
+    public void addCard(Card c) {
+        cards.add(c);
+    }
+    
     public ArrayList<Card> getCards() {
         return this.cards;
     }
@@ -28,9 +32,4 @@ public class Deck {
         return this.nome;
     }
     
-    public void addCard(Card c) {
-        cards.add(c);
-    }
-
-
 }

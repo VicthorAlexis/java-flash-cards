@@ -2,12 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="Group 20201123-10:54:38">
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/frames/</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/flashcards/FlashCards.java</file>
+        </group>
         <group>
-            <file>file:/D:/Users/costa/Documents/Materias/TP1/FlashCards/src/flashcards/Card.java</file>
-            <file>file:/D:/Users/costa/Documents/Materias/TP1/FlashCards/src/frames/TelaDeck.java</file>
-            <file>file:/D:/Users/costa/Documents/Materias/TP1/FlashCards/src/frames/TelaInicial.java</file>
-            <file>file:/D:/Users/costa/Documents/Materias/TP1/FlashCards/src/flashcards/Estudo.java</file>
-            <file>file:/D:/Users/costa/Documents/Materias/TP1/FlashCards/src/frames/TelaEstudar.java</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/frames/TelaInicial.java</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/flashcards/Deck.java</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/flashcards/</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/flashcards/Data.java</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/frames/TelaDeck.java</file>
+            <file>file:/C:/Users/odijovi/java-flash-cards/src/flashcards/Card.java</file>
         </group>
     </open-files>
 </project-private>

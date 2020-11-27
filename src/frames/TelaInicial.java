@@ -1,10 +1,12 @@
 package frames;
 
+import flashcards.Data;
 import flashcards.Deck;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -32,7 +34,7 @@ public class TelaInicial extends javax.swing.JFrame {
      * Creates new form Layout
      */
     public TelaInicial() {
-        decks = new ArrayList<Deck>();
+        decks = new ArrayList();
         initComponents();
         panelInicial.requestFocus();
         
@@ -222,8 +224,11 @@ public class TelaInicial extends javax.swing.JFrame {
         if (!txtAdicionar.getText().equals("") && txtAdicionar.getForeground() != Color.GRAY) {
             lstDeque.setFixedCellHeight(30);
             String nomeDeck = txtAdicionar.getText().trim();
+            
+            // Adicionando data de criação:
             decks.add(new Deck(nomeDeck));
             mod.addElement(nomeDeck);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Campo não preenchido!",
                         "Aviso", JOptionPane.WARNING_MESSAGE);

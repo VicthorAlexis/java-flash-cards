@@ -129,7 +129,7 @@ public class TelaDeck extends javax.swing.JFrame {
         btnExcluir.setEnabled(b);
         lblData.setEnabled(b);
         lblMostraData.setEnabled(b);
-      
+        
         lblAcertos.setEnabled(b);
         lblErros.setEnabled(b);
         lblNumAcertos.setEnabled(b); lblNumAcertos.setText("0");
@@ -265,7 +265,6 @@ public class TelaDeck extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela deck");
         setBackground(new java.awt.Color(255, 255, 255));
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/deck.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
@@ -356,7 +355,7 @@ public class TelaDeck extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lblData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMostraData, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                        .addComponent(lblMostraData, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
