@@ -187,28 +187,38 @@ public class TelaUser extends javax.swing.JFrame {
         // índice do item selecionado
         int i = lstUsers.getSelectionModel().getMaxSelectionIndex();
 
+        javax.swing.JTextField tfValidar = new javax.swing.JTextField();
         javax.swing.JTextField tfNome = new javax.swing.JTextField(users.get(i).getNome());
         javax.swing.JTextField tfSenha = new javax.swing.JTextField(users.get(i).getSenha());
-
+        
         Object[] message = {
-            "Nome: ", tfNome,
-            "Senha: ", tfSenha,
+            "Senha: ", tfValidar,
         };
+        
+        int opt = JOptionPane.showConfirmDialog(null, message, "Insira a senha antiga:", JOptionPane.PLAIN_MESSAGE);
+        
+        if(opt == JOptionPane.OK_OPTION) {
+            
+            Object[] message2 = {
+                "Nome: ", tfNome,
+                "Senha: ", tfSenha,
+            };
 
-        int option = JOptionPane.showConfirmDialog(null, message, "Adicionar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
+            int opt2 = JOptionPane.showConfirmDialog(null, message2, "Modificar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
 
-        if(option == JOptionPane.OK_OPTION) {
-            String newNome = tfNome.getText();
-            String newSenha = tfSenha.getText();
+            if(opt2 == JOptionPane.OK_OPTION) {
+                String newNome = tfNome.getText();
+                String newSenha = tfSenha.getText();
 
-            if (newNome.equals("") || newSenha.equals("")) {
-                JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nO perfil não foi adicionado!",
-                    "Aviso", JOptionPane.WARNING_MESSAGE);
-            } else {
-                modUser.remove(i);
-                modUser.add(i, newNome);
+                if (newNome.equals("") || newSenha.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nO perfil não foi adicionado!",
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    modUser.remove(i);
+                    modUser.add(i, newNome);
 
-                users.get(i).modificar(newNome, newSenha);
+                    users.get(i).modificar(newNome, newSenha);
+                }
             }
         }
     }//GEN-LAST:event_btnModificarUserActionPerformed
