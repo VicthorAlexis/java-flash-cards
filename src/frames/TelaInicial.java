@@ -226,7 +226,11 @@ public class TelaInicial extends javax.swing.JFrame {
             String nomeDeck = txtAdicionar.getText().trim();
             
             // Adicionando data de criação:
-            decks.add(new Deck(nomeDeck));
+            Calendar c = Calendar.getInstance();
+            
+            Data data = new Data(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY));
+            
+            decks.add(new Deck(nomeDeck, data));
             mod.addElement(nomeDeck);
             
         } else {

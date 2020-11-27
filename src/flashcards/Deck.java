@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class Deck {
     private String nome;
     ArrayList<Card> cards;
+    private Data data;
 
-    public Deck(String nome) {
+    public Deck(String nome, Data data) {
         this.nome = nome;
+        this.data = data;
         cards = new ArrayList<>();
     }
     
@@ -30,6 +32,10 @@ public class Deck {
     
     public String getNome() {
         return this.nome;
+    }
+
+    public Data getData() {
+        return data;
     }
     
 }

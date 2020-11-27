@@ -128,7 +128,7 @@ public class TelaDeck extends javax.swing.JFrame {
         btnModificar.setEnabled(b);
         btnExcluir.setEnabled(b);
         lblData.setEnabled(b);
-        lblMostraData.setEnabled(b);
+        lblMostraData.setEnabled(b); lblMostraData.setText(this.deck.getData().imprimirData());
         
         lblAcertos.setEnabled(b);
         lblErros.setEnabled(b);
