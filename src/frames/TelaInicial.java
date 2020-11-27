@@ -2,6 +2,7 @@ package frames;
 
 import flashcards.Data;
 import flashcards.Deck;
+import flashcards.User;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,11 +31,13 @@ public class TelaInicial extends javax.swing.JFrame {
     ArrayList<Deck> decks;
     private boolean tfClicked = false;
     DefaultListModel mod = new DefaultListModel();
+    
     /**
      * Creates new form Layout
      */
-    public TelaInicial() {
-        decks = new ArrayList();
+    public TelaInicial(User user) {
+        decks = user.getDecks();
+        
         initComponents();
         panelInicial.requestFocus();
         
@@ -53,6 +56,13 @@ public class TelaInicial extends javax.swing.JFrame {
                 btnExcluir.setEnabled(false);
             }
         });
+        
+        // Colocar os decks na tabela (Se foram adicionados anteriormente):
+        lstDeque.setModel(mod);
+        for(int i = 0; i < decks.size(); ++i) {
+            mod.addElement(decks.get(i).getNome());
+        }
+        
     }
 
     /**
@@ -74,7 +84,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAcessar = new javax.swing.JButton();
         btnRenomear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         panelInicial.setBackground(new java.awt.Color(255, 255, 255));
@@ -87,7 +97,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         btnAdicionar.setBackground(new java.awt.Color(198, 247, 247));
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
-        btnAdicionar.setBorder(null);
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
@@ -113,6 +122,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        lstDeque.setToolTipText("");
         lstDeque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstDequeMouseClicked(evt);
@@ -155,13 +165,13 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(btnRenomear)
                 .addGap(56, 56, 56)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(106, 106, 106)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -187,7 +197,7 @@ public class TelaInicial extends javax.swing.JFrame {
             panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInicialLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,6 +236,7 @@ public class TelaInicial extends javax.swing.JFrame {
             String nomeDeck = txtAdicionar.getText().trim();
             
             // Adicionando data de criação:
+            
             Calendar c = Calendar.getInstance();
             
             Data data = new Data(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY));
@@ -242,7 +253,7 @@ public class TelaInicial extends javax.swing.JFrame {
         txtAdicionar.setForeground(java.awt.Color.GRAY);
         txtAdicionar.setText("Adicionar Deque");
         tfClicked = false;
-        
+   
         
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -324,7 +335,7 @@ public class TelaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaInicial().setVisible(true);
+                new TelaInicial(null).setVisible(true);
             }
         });
     }

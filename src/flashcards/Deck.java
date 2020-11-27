@@ -13,8 +13,11 @@ import java.util.ArrayList;
  */
 public class Deck {
     private String nome;
-    ArrayList<Card> cards;
     private Data data;
+    
+    // Referências às outras classes
+    User user;
+    ArrayList<Card> cards;
 
     public Deck(String nome, Data data) {
         this.nome = nome;

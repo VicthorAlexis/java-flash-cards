@@ -777,6 +777,7 @@ public class TelaDeck extends javax.swing.JFrame {
         
         javax.swing.JTextField tfFrente = new javax.swing.JTextField(deck.getCards().get(index).getFrente());
         javax.swing.JTextField tfVerso = new javax.swing.JTextField(deck.getCards().get(index).getVerso());
+        
         Object[] message = {
             "Frente:", tfFrente,
             "Verso:", tfVerso,

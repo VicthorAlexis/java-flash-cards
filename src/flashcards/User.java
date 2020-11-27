@@ -24,7 +24,16 @@ public class User {
         this.data = data;
         decks = new ArrayList();
     }
+    
+    public void modificar(String nome, String senha) {
+        this.nome = nome;
+        this.senha = senha;
+    }
 
+    public ArrayList<Deck> getDecks() {
+        return decks;
+    }  
+    
     public String getNome() {
         return nome;
     }
