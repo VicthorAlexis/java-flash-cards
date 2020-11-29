@@ -45,6 +45,22 @@ public class TelaUser extends javax.swing.JFrame {
                 btnExcluirUser.setEnabled(false);
             }
         });
+        
+        // Carregar usuários adicionados anteriormente:
+        int iterator = 0;
+        boolean verificador;
+        
+        do {
+            User user = new User();
+            verificador = user.carregarUser(iterator, user);
+            users.add(user);
+            ++iterator;
+        } while(verificador);
+        
+        lstUsers.setModel(modUser);
+        for(int i = 0; i < users.size(); ++i) {
+            modUser.addElement(users.get(i).getNome());
+        }
     }
 
     /**
@@ -177,7 +193,10 @@ public class TelaUser extends javax.swing.JFrame {
                 User newUser = new User(nome, senha, dataDeCriacao);
 
                 users.add(newUser);
-
+                
+                // Salvamento automático do usuário:
+                newUser.salvarUser(newUser);
+                
                 modUser.addElement(nome); // Só o nome vai aparecer na lista.
             }
         }
@@ -197,7 +216,7 @@ public class TelaUser extends javax.swing.JFrame {
         
         int opt = JOptionPane.showConfirmDialog(null, message, "Insira a senha antiga:", JOptionPane.PLAIN_MESSAGE);
         
-        if(opt == JOptionPane.OK_OPTION) {
+        if(opt == JOptionPane.OK_OPTION && tfValidar.getText().equals(users.get(i).getSenha())) {
             
             Object[] message2 = {
                 "Nome: ", tfNome,
@@ -220,6 +239,9 @@ public class TelaUser extends javax.swing.JFrame {
                     users.get(i).modificar(newNome, newSenha);
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Senha inválida!",
+                "Aviso", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModificarUserActionPerformed
 
@@ -249,7 +271,7 @@ public class TelaUser extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!",
                 "Aviso", JOptionPane.INFORMATION_MESSAGE);
-
+            
             TelaInicial telaInicial = new TelaInicial(users.get(i));
             telaInicial.setVisible(true);
             

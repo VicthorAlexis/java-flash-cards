@@ -5,6 +5,14 @@
  */
 package flashcards;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +26,10 @@ public class User {
     private Data data;
     ArrayList<Deck> decks;
 
+    public User(){
+        
+    }
+    
     public User(String nome, String senha, Data data) {
         this.nome = nome;
         this.senha = senha;
@@ -29,7 +41,65 @@ public class User {
         this.nome = nome;
         this.senha = senha;
     }
+    
+    public void addDeck(Deck deck) {
+        decks.add(deck);
+    }
+    
+    public boolean carregarUser(int index, User user) {
+        
+        int contador = 0;
+        
+        try{
+            FileInputStream arq = new FileInputStream("user.txt");
+            InputStreamReader input = new InputStreamReader(arq);
+            BufferedReader br = new BufferedReader(input);
+            
+            String linha = br.readLine();
+            Data dataAuxiliar = new Data();
+            
+            do {
+                linha = br.readLine();
+                
+                if(contador == index && linha != null) {
+                    String[] divisoes = linha.split(";");
+                    // Carregar os atributos de user separadamente:
+                    user.setNome(divisoes[0]);
+                    user.setSenha(divisoes[1]);
+                    /*Adicionando data de criação: */
+                    dataAuxiliar.setDataComString(divisoes[2]);
+                    user.setData(dataAuxiliar);
+                    user.getData().imprimirData();
+                    user.decks = new ArrayList();
+                    return true;
+                }
+                ++contador;
+            }while(linha != null);
+   
+        }catch(Exception e) {
+            System.out.println("Erro ao ler o arquivo!");
+        }
+        
+        return false;
+    }
 
+    public void salvarUser(User user) {
+        try{
+            File file = new File("user.txt");
+            FileWriter fr = new FileWriter(file, true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter pr = new PrintWriter(br);
+            
+            pr.println(user.getNome() + ";" + user.getSenha() + ";" + user.getData().imprimirData());
+            pr.close();
+            br.close();
+            fr.close();
+            
+        }catch(Exception e) {
+            System.out.println("Erro ao escrever no arquivo!");
+        }
+    }
+    
     public ArrayList<Deck> getDecks() {
         return decks;
     }  

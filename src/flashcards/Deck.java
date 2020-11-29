@@ -5,6 +5,10 @@
  */
 package flashcards;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -29,6 +33,23 @@ public class Deck {
         cards.add(c);
     }
     
+    public void salvarDeck(Deck deck) {
+        try{
+            File file = new File("deck.txt");
+            FileWriter fr = new FileWriter(file, true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter pr = new PrintWriter(br);
+            
+            pr.println(deck.getUser() + ";" + deck.getNome() + ";" + deck.getData());
+            pr.close();
+            br.close();
+            fr.close();
+            
+        }catch(Exception e) {
+            System.out.println("Erro ao escrever no arquivo!");
+        }
+    }
+    
     public ArrayList<Card> getCards() {
         return this.cards;
     }
@@ -40,5 +61,14 @@ public class Deck {
     public Data getData() {
         return data;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     
 }
