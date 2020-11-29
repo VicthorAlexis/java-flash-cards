@@ -77,7 +77,7 @@ public class Data {
         this.mes = Integer.parseInt(dataEmString.substring(3, 5));
         this.ano = Integer.parseInt(dataEmString.substring(6, 10));
         
-        this.dataFormatada = this.dia + "/" + (this.mes+1) + "/" + this.ano;
+        this.dataFormatada = dataEmString;
     }// formato: DD/MM/AAAA
     
     public String imprimirData() {
