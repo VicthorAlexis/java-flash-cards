@@ -10,10 +10,20 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -55,7 +65,7 @@ public class User {
             InputStreamReader input = new InputStreamReader(arq);
             BufferedReader br = new BufferedReader(input);
             
-            String linha = br.readLine();
+            String linha;
             Data dataAuxiliar = new Data();
             
             do {
@@ -71,11 +81,14 @@ public class User {
                     user.setData(dataAuxiliar);
                     user.getData().imprimirData();
                     user.decks = new ArrayList();
+                    
+                    arq.close();
+                    input.close();
                     return true;
                 }
                 ++contador;
             }while(linha != null);
-   
+            
         }catch(Exception e) {
             System.out.println("Erro ao ler o arquivo!");
         }
@@ -83,20 +96,58 @@ public class User {
         return false;
     }
 
-    public void salvarUser(User user) {
+    public void salvarUser() {
         try{
             File file = new File("user.txt");
             FileWriter fr = new FileWriter(file, true);
-            BufferedWriter br = new BufferedWriter(fr);
-            PrintWriter pr = new PrintWriter(br);
+            BufferedWriter bw = new BufferedWriter(fr);
             
-            pr.println(user.getNome() + ";" + user.getSenha() + ";" + user.getData().imprimirData());
-            pr.close();
-            br.close();
+            bw.write(this.getNome() + ";" + this.getSenha() + ";" + 
+                    this.getData().imprimirData() + System.getProperty("line.separator"));
+            
+            bw.close();
             fr.close();
-            
-        }catch(Exception e) {
+        }catch(IOException e) {
             System.out.println("Erro ao escrever no arquivo!");
+        }
+    }
+    
+    public void apagarUser(int index) {
+        try{
+            File userFile = new File("user.txt");
+            File temp = new File("temp.txt");
+            temp.createNewFile();
+            
+            PrintStream psTemp = new PrintStream(temp);
+            Scanner scanUser = new Scanner(userFile);
+            String currentLine;
+            int count = 0;
+            
+            // imprimir no arquivo temp.txt sem o usuário deletado
+            while (scanUser.hasNext()) {
+                currentLine = scanUser.nextLine();
+                if (count != index) // pular usuário excluído
+                    psTemp.print(currentLine + System.getProperty("line.separator"));
+                ++count;
+            }
+            Scanner scanTemp = new Scanner(temp);
+            PrintStream psUser = new PrintStream(userFile);
+            
+            // copiar de temp.txt para user.txt
+            while (scanTemp.hasNext()) {
+                currentLine = scanTemp.nextLine();
+                psUser.print(currentLine + System.getProperty("line.separator"));
+                ++count;
+            }
+            
+            psTemp.close();
+            psUser.close();
+            scanTemp.close();
+            scanUser.close();
+            temp.delete();  // deletar arquivo temporário
+
+        }catch(IOException e) {
+            System.out.println("Erro ao apagar usuário!");
         }
     }
     

@@ -34,6 +34,7 @@ public class TelaUser extends javax.swing.JFrame {
         btnModificarUser.setEnabled(false);
         btnExcluirUser.setEnabled(false);
         
+        lstUsers.setFixedCellHeight(30);
         lstUsers.addListSelectionListener((ListSelectionEvent e) -> {
             if (lstUsers.getSelectedValue() != null) {
                 btnEntrarUser.setEnabled(true);
@@ -53,7 +54,8 @@ public class TelaUser extends javax.swing.JFrame {
         do {
             User user = new User();
             verificador = user.carregarUser(iterator, user);
-            users.add(user);
+            if (verificador)
+                users.add(user);
             ++iterator;
         } while(verificador);
         
@@ -171,12 +173,13 @@ public class TelaUser extends javax.swing.JFrame {
 
         lstUsers.setModel(modUser);
         javax.swing.JTextField tfNome = new javax.swing.JTextField();
-        javax.swing.JTextField tfSenha = new javax.swing.JTextField();
+        javax.swing.JPasswordField tfSenha = new javax.swing.JPasswordField();
 
         Object[] message = {
             "Nome: ", tfNome,
             "Senha: ", tfSenha,
         };
+        tfSenha.setEchoChar('\u2022');
 
         int option = JOptionPane.showConfirmDialog(null, message, "Adicionar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
 
@@ -195,7 +198,7 @@ public class TelaUser extends javax.swing.JFrame {
                 users.add(newUser);
                 
                 // Salvamento automático do usuário:
-                newUser.salvarUser(newUser);
+                newUser.salvarUser();
                 
                 modUser.addElement(nome); // Só o nome vai aparecer na lista.
             }
@@ -235,7 +238,7 @@ public class TelaUser extends javax.swing.JFrame {
                 } else {
                     modUser.remove(i);
                     modUser.add(i, newNome);
-
+                    
                     users.get(i).modificar(newNome, newSenha);
                 }
             }
@@ -253,32 +256,31 @@ public class TelaUser extends javax.swing.JFrame {
             modUser.remove(index);
 
             // Tirar do ArrayList
+            User userRemove = users.get(index);
             users.remove(index);
+            userRemove.apagarUser(index);
+            
         }
     }//GEN-LAST:event_btnExcluirUserActionPerformed
 
     private void btnEntrarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarUserActionPerformed
-        javax.swing.JTextField tfSenha = new javax.swing.JTextField();
+        javax.swing.JPasswordField tfSenha = new javax.swing.JPasswordField();
         int i = lstUsers.getSelectionModel().getMaxSelectionIndex();
 
         Object[] message = {
             "Senha: ", tfSenha,
         };
-
+        tfSenha.setEchoChar('\u2022');
         int option = JOptionPane.showConfirmDialog(null, message, "Digite a senha para acessar:", JOptionPane.PLAIN_MESSAGE);
 
-        if(option == JOptionPane.OK_OPTION && tfSenha.getText().equals(users.get(i).getSenha())) {
-
-            JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!",
-                "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            
-            TelaInicial telaInicial = new TelaInicial(users.get(i));
-            telaInicial.setVisible(true);
-            
-        }// Verificando se a senha colocada é a correta!
-        else {
-            JOptionPane.showMessageDialog(null, "Senha inválida!",
-                "Aviso", JOptionPane.ERROR_MESSAGE);
+        if(option == JOptionPane.OK_OPTION) {
+            if (tfSenha.getText().equals(users.get(i).getSenha())) {
+                TelaInicial telaInicial = new TelaInicial(users.get(i));
+                telaInicial.setVisible(true);
+            } else { // Verificando se a senha colocada é a correta!
+                JOptionPane.showMessageDialog(null, "Senha inválida!",
+                    "Aviso", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnEntrarUserActionPerformed
 
