@@ -193,6 +193,7 @@ public class User {
         }
     }
     
+    // atualizar arquivo deck.txt com respeito ao nome do usuário
     private void atualizarDeck(String antigoNome, String novoNome) {
         try{
             File deckFile = new File("deck.txt");
@@ -236,6 +237,7 @@ public class User {
         
     }
     
+    // atualizar arquivo card.txt com respeito ao nome do usuário
     private void atualizarCard(String antigoNome, String novoNome) {
         try{
             File deckFile = new File("card.txt");

@@ -187,6 +187,7 @@ public class Deck {
         }
     }
     
+    // atualizar arquivo card.txt com respeito ao nome do deck
     private void atualizarCard(String antigoNome, String novoNome) {
         try{
             File cardFile = new File("card.txt");
