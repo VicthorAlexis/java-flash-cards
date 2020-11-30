@@ -1,6 +1,5 @@
-Felipao;verbos;29/11/2020;2
-Felipao;nouns;29/11/2020;1
-Felipao;phrasal verbs;29/11/2020;0
-Joao;Deck 1;29/11/2020;0
-Joao;Deck 2;29/11/2020;0
-Felipao;Advérbios;30/11/2020;0
+Felipe;verbos;29/11/2020;19
+Felipe;nouns;29/11/2020;0
+Felipe;phrasal verbs;29/11/2020;1
+Joao;Deck 1;30/11/2020;0
+Felipe;deck 2;30/11/2020;0

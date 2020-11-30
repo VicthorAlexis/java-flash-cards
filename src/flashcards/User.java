@@ -67,6 +67,7 @@ public class User {
             do {
                 linha = br.readLine();
                 
+                
                 if(contador == index && linha != null) {
                     String[] divisoes = linha.split(";");
                     // Carregar os atributos de user separadamente:
@@ -152,7 +153,6 @@ public class User {
         }catch(IOException e) {
             System.out.println("Erro ao apagar usuário!");
         }
-        
     }
     
     public void apagarUser(int index) {
@@ -183,6 +183,10 @@ public class User {
                 ++count;
             }
             
+            // apagar decks e cards desse usuário
+            atualizarDeck(getNome(), "");
+            atualizarCard(getNome(), "");
+            
             psTemp.close();
             psUser.close();
             scanTemp.close();
@@ -193,7 +197,7 @@ public class User {
             System.out.println("Erro ao apagar usuário!");
         }
     }
-    
+       
     // atualizar arquivo deck.txt com respeito ao nome do usuário
     private void atualizarDeck(String antigoNome, String novoNome) {
         try{
@@ -205,16 +209,26 @@ public class User {
             Scanner scanUser = new Scanner(deckFile);
             String currentLine;
 
-            // imprimir no arquivo temp.txt sem o usuário deletado
-            while (scanUser.hasNext()) {
-                currentLine = scanUser.nextLine();
-                String[] divisoes = currentLine.split(";");
-                
-                if (divisoes[0].equals(antigoNome)) // copiar se não
-                    psTemp.print(novoNome + ";" + divisoes[1] + ";"
-                            + divisoes[2] + System.getProperty("line.separator"));
-                else
-                    psTemp.print(currentLine + System.getProperty("line.separator"));
+            if (!novoNome.equals("")) {
+                // imprimir no arquivo tempDeck.txt o usuário atualizado
+                while (scanUser.hasNext()) {
+                    currentLine = scanUser.nextLine();
+                    String[] divisoes = currentLine.split(";");
+
+                    if (divisoes[0].equals(antigoNome))
+                        psTemp.print(novoNome + ";" + divisoes[1] + ";" + divisoes[2] + ";"
+                                + divisoes[3] + System.getProperty("line.separator"));
+                    else
+                        psTemp.print(currentLine + System.getProperty("line.separator"));
+                }
+            } else {    // apagar deck se tem o antigoNome nele
+                while (scanUser.hasNext()) {
+                    currentLine = scanUser.nextLine();
+                    String[] divisoes = currentLine.split(";");
+
+                    if (!divisoes[0].equals(antigoNome))     // pular deck excluído
+                        psTemp.print(currentLine + System.getProperty("line.separator"));
+                }
             }
             
             Scanner scanTemp = new Scanner(temp);
@@ -249,22 +263,32 @@ public class User {
             Scanner scanUser = new Scanner(deckFile);
             String currentLine;
 
-            // imprimir no arquivo temp.txt sem o usuário deletado
-            while (scanUser.hasNext()) {
-                currentLine = scanUser.nextLine();
-                String[] divisoes = currentLine.split(";");
-                
-                if (divisoes[0].equals(antigoNome)) // copiar
-                    psTemp.print(novoNome + ";" + divisoes[1] + ";" + divisoes[2] + ";" + divisoes[3] + ";"
-                            + divisoes[4] + ";" + divisoes[5] + ";" + divisoes[6] + System.getProperty("line.separator"));
-                else
-                    psTemp.print(currentLine + System.getProperty("line.separator"));
+            if (!novoNome.equals("")) {
+                // imprimir no arquivo tempCard.txt com o usuário modificado
+                while (scanUser.hasNext()) {
+                    currentLine = scanUser.nextLine();
+                    String[] divisoes = currentLine.split(";");
+
+                    if (divisoes[0].equals(antigoNome)) // copiar
+                        psTemp.print(novoNome + ";" + divisoes[1] + ";" + divisoes[2] + ";" + divisoes[3] + ";"
+                                + divisoes[4] + ";" + divisoes[5] + ";" + divisoes[6] + System.getProperty("line.separator"));
+                    else
+                        psTemp.print(currentLine + System.getProperty("line.separator"));
+                }
+            } else {    // apagar card se tem o antigoNome nele
+                while (scanUser.hasNext()) {
+                    currentLine = scanUser.nextLine();
+                    String[] divisoes = currentLine.split(";");
+
+                    if (!divisoes[0].equals(antigoNome))     // pular card excluído
+                        psTemp.print(currentLine + System.getProperty("line.separator"));
+                }
             }
             
             Scanner scanTemp = new Scanner(temp);
             PrintStream psUser = new PrintStream(deckFile);
             
-            // copiar de temp.txt para card.txt
+            // copiar de tempCard.txt para card.txt
             while (scanTemp.hasNext()) {
                 currentLine = scanTemp.nextLine();
                 psUser.print(currentLine + System.getProperty("line.separator"));
