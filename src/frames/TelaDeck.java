@@ -66,17 +66,21 @@ public class TelaDeck extends javax.swing.JFrame {
         });
         
         // Carregar decks adicionados anteriormente:
-        int iterator = 0;
-        boolean verificador;
-        
-        do {
-            Card card = new Card(deck);
-            verificador = card.carregarCard(iterator);
-            if (verificador && card.getFrente() != null)
-                deck.addCard(card);
-            ++iterator;
-        } while(verificador);
-        
+        if(deck.isCarregouDados() == false) {
+            int iterator = 0;
+            boolean verificador;
+
+            do {
+                Card card = new Card(deck);
+                verificador = card.carregarCard(iterator);
+                if (verificador && card.getFrente() != null)
+                    deck.addCard(card);
+                    //System.out.println(deck.getCards().get(iterator).getFrente());
+                ++iterator;
+            } while(verificador);
+            
+            deck.setCarregouDados(true);
+        }
         // adiciona cards na lista caso deck ja contenha card(s) ao abrir a telaDeck
         lstCards.setModel(mod);
         lstCards.setFixedCellHeight(30);
@@ -91,12 +95,12 @@ public class TelaDeck extends javax.swing.JFrame {
 
         // salvar dados apenas ao fechar a janela para facilitar o processo de atualização
         // do número de acertos e erros
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        /*this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 deck.setCards(new ArrayList<>());   // limpar cards depois de fechar a janela
             }
-        });
+        });*/
         
 
     }
@@ -999,6 +1003,12 @@ public class TelaDeck extends javax.swing.JFrame {
         // atualizar estatisticas
         int index = lstCards.getSelectionModel().getMaxSelectionIndex();
         setAcertoErroLabels(index);
+        
+        // Dizer se o deck foi estudado ou não:
+        int qtdVezesEstudadas = deck.getVezesEstudadas() + 1;
+        deck.setVezesEstudadas(qtdVezesEstudadas);
+        deck.modificarDeck(Integer.toString(deck.getVezesEstudadas()), deck.getIndiceDoDeck(), 2);
+        
     }//GEN-LAST:event_btnRetornarActionPerformed
 
     private void btnAcerteiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcerteiActionPerformed

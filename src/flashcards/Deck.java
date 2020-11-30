@@ -24,6 +24,9 @@ import java.util.Scanner;
 public class Deck {
     private String nome;
     private Data data;
+    private boolean carregouDados = false;
+    private int VezesEstudadas = 0;
+    private int indiceDoDeckAtual;
     
     // Referências às outras classes
     private User user;
@@ -51,7 +54,7 @@ public class Deck {
             PrintWriter pr = new PrintWriter(br);
             
             pr.print(this.getUser().getNome() + ";" + this.getNome() + ";"
-                    + this.getData().getDataFormatada() + System.getProperty("line.separator"));
+                    + this.getData().getDataFormatada() + ";" + this.getVezesEstudadas() + System.getProperty("line.separator"));
             pr.close();
             br.close();
             fr.close();
@@ -124,6 +127,7 @@ public class Deck {
                         this.setData(dataAuxiliar);
                         this.getData().imprimirData();
                         this.cards = new ArrayList();
+                        this.setVezesEstudadas(Integer.parseInt(divisoes[3]));
                     }
                     arq.close();
                     input.close();
@@ -140,7 +144,7 @@ public class Deck {
     }
     
     // renomeia o deck no arquivo deck.txt
-    public void modificarDeck(String novoNome, int index) {
+    public void modificarDeck(String novoNome, int index, int tipo) {
         try{
             File deckFile = new File("deck.txt");
             File temp = new File("tempDeck.txt");
@@ -157,14 +161,22 @@ public class Deck {
                 if (count != index)
                     psTemp.print(currentLine + System.getProperty("line.separator"));
                 else {
-                    String[] divisores = currentLine.split(";");
-                    psTemp.print(divisores[0] + ";" + novoNome + ";" + 
-                        divisores[2] + System.getProperty("line.separator"));
+                    if(tipo == 1) {
+                        String[] divisores = currentLine.split(";");
+                        psTemp.print(divisores[0] + ";" + novoNome + ";" + 
+                            divisores[2] + ";" + divisores[3] + System.getProperty("line.separator"));
+                
+                    } else if(tipo == 2) {
+                        String[] divisores = currentLine.split(";");
+                        psTemp.print(divisores[0] + ";" + divisores[1] + ";" + 
+                            divisores[2] + ";" + novoNome + System.getProperty("line.separator"));
+                    }
                 }
                 ++count;
             }
             //          nomeAntigo, novoNome
-            atualizarCard(getNome(), novoNome);
+            if(tipo == 1)
+                atualizarCard(getNome(), novoNome);
             
             Scanner scanTemp = new Scanner(temp);
             PrintStream psUser = new PrintStream(deckFile);
@@ -263,5 +275,30 @@ public class Deck {
     public void setUser(User user) {
         this.user = user;
     }    
+
+    public int getVezesEstudadas() {
+        return VezesEstudadas;
+    }
+
+    public void setVezesEstudadas(int VezesEstudadas) {
+        this.VezesEstudadas = VezesEstudadas;
+    }
+
+    public boolean isCarregouDados() {
+        return carregouDados;
+    }
+
+    public void setCarregouDados(boolean carregouDados) {
+        this.carregouDados = carregouDados;
+    }
+
+    public int getIndiceDoDeck() {
+        return indiceDoDeckAtual;
+    }
+
+    public void setIndiceDoDeckAtual(int indiceDoDeck) {
+        this.indiceDoDeckAtual = indiceDoDeck;
+    }
+    
     
 }
