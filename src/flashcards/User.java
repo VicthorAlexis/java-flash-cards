@@ -47,11 +47,6 @@ public class User {
         decks = new ArrayList();
     }
     
-    public void modificar(String nome, String senha) {
-        this.nome = nome;
-        this.senha = senha;
-    }
-    
     public void addDeck(Deck deck) {
         decks.add(deck);
     }
@@ -112,10 +107,57 @@ public class User {
         }
     }
     
+    public void modificar(String nome, String senha, int index) {
+        try{
+            File userFile = new File("user.txt");
+            File temp = new File("tempUser.txt");
+            temp.createNewFile();
+            
+            PrintStream psTemp = new PrintStream(temp);
+            Scanner scanUser = new Scanner(userFile);
+            String currentLine;
+            int count = 0;
+            
+            // imprimir no arquivo temp.txt com as modificações feitas
+            while (scanUser.hasNext()) {
+                currentLine = scanUser.nextLine();
+                if (count != index)
+                    psTemp.print(currentLine + System.getProperty("line.separator"));
+                else {
+                    psTemp.print(nome + ";" + senha + ";" + 
+                        this.getData().imprimirData() + System.getProperty("line.separator"));
+                }
+                ++count;
+            }
+            //          nomeAntigo, novoNome
+            atualizarDeck(getNome(), nome);
+            atualizarCard(getNome(), nome);
+            
+            Scanner scanTemp = new Scanner(temp);
+            PrintStream psUser = new PrintStream(userFile);
+            
+            // copiar de temp.txt para user.txt
+            while (scanTemp.hasNext()) {
+                currentLine = scanTemp.nextLine();
+                psUser.print(currentLine + System.getProperty("line.separator"));
+            }
+            
+            psTemp.close();
+            psUser.close();
+            scanTemp.close();
+            scanUser.close();
+            temp.delete();  // deletar arquivo temporário
+
+        }catch(IOException e) {
+            System.out.println("Erro ao apagar usuário!");
+        }
+        
+    }
+    
     public void apagarUser(int index) {
         try{
             File userFile = new File("user.txt");
-            File temp = new File("temp.txt");
+            File temp = new File("tempUser.txt");
             temp.createNewFile();
             
             PrintStream psTemp = new PrintStream(temp);
@@ -151,6 +193,92 @@ public class User {
         }
     }
     
+    private void atualizarDeck(String antigoNome, String novoNome) {
+        try{
+            File deckFile = new File("deck.txt");
+            File temp = new File("tempDeck.txt");
+            temp.createNewFile();
+            
+            PrintStream psTemp = new PrintStream(temp);
+            Scanner scanUser = new Scanner(deckFile);
+            String currentLine;
+
+            // imprimir no arquivo temp.txt sem o usuário deletado
+            while (scanUser.hasNext()) {
+                currentLine = scanUser.nextLine();
+                String[] divisoes = currentLine.split(";");
+                
+                if (divisoes[0].equals(antigoNome)) // copiar se não
+                    psTemp.print(novoNome + ";" + divisoes[1] + ";"
+                            + divisoes[2] + System.getProperty("line.separator"));
+                else
+                    psTemp.print(currentLine + System.getProperty("line.separator"));
+            }
+            
+            Scanner scanTemp = new Scanner(temp);
+            PrintStream psUser = new PrintStream(deckFile);
+            
+            // copiar de temp.txt para user.txt
+            while (scanTemp.hasNext()) {
+                currentLine = scanTemp.nextLine();
+                psUser.print(currentLine + System.getProperty("line.separator"));
+            }
+            
+            psTemp.close();
+            psUser.close();
+            scanTemp.close();
+            scanUser.close();
+            temp.delete();  // deletar arquivo temporário
+
+        }catch(IOException e) {
+            System.out.println("Erro ao modificar usuário!");
+        }
+        
+    }
+    
+    private void atualizarCard(String antigoNome, String novoNome) {
+        try{
+            File deckFile = new File("card.txt");
+            File temp = new File("tempCard.txt");
+            temp.createNewFile();
+            
+            PrintStream psTemp = new PrintStream(temp);
+            Scanner scanUser = new Scanner(deckFile);
+            String currentLine;
+
+            // imprimir no arquivo temp.txt sem o usuário deletado
+            while (scanUser.hasNext()) {
+                currentLine = scanUser.nextLine();
+                String[] divisoes = currentLine.split(";");
+                
+                if (divisoes[0].equals(antigoNome)) // copiar
+                    psTemp.print(novoNome + ";" + divisoes[1] + ";" + divisoes[2] + ";" + divisoes[3] + ";"
+                            + divisoes[4] + ";" + divisoes[5] + ";" + divisoes[6] + System.getProperty("line.separator"));
+                else
+                    psTemp.print(currentLine + System.getProperty("line.separator"));
+            }
+            
+            Scanner scanTemp = new Scanner(temp);
+            PrintStream psUser = new PrintStream(deckFile);
+            
+            // copiar de temp.txt para card.txt
+            while (scanTemp.hasNext()) {
+                currentLine = scanTemp.nextLine();
+                psUser.print(currentLine + System.getProperty("line.separator"));
+            }
+            
+            psTemp.close();
+            psUser.close();
+            scanTemp.close();
+            scanUser.close();
+            temp.delete();  // deletar arquivo temporário
+
+        }catch(IOException e) {
+            System.out.println("Erro ao modificar usuário!");
+        }
+        
+    }
+    
     public ArrayList<Deck> getDecks() {
         return decks;
     }  
@@ -178,5 +306,8 @@ public class User {
     public void setData(Data data) {
         this.data = data;
     }
-    
+
+    public void setDecks(ArrayList<Deck> decks) {
+        this.decks = decks;
+    }   
 }

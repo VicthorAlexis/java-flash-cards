@@ -29,13 +29,16 @@ import javax.swing.event.ListSelectionListener;
  */
 public class TelaInicial extends javax.swing.JFrame {
     ArrayList<Deck> decks;
+    private User user;
     private boolean tfClicked = false;
-    DefaultListModel mod = new DefaultListModel();
+    private DefaultListModel mod = new DefaultListModel();
     
     /**
      * Creates new form Layout
      */
     public TelaInicial(User user) {
+        this.user = user;
+        
         decks = user.getDecks();
         
         initComponents();
@@ -45,6 +48,7 @@ public class TelaInicial extends javax.swing.JFrame {
         txtAdicionar.setText("Adicionar Deque");
         
         // habilitar ou desabilitar botões se um item estiver selecionado ou nao
+        lstDeque.setFixedCellHeight(30);
         lstDeque.addListSelectionListener((ListSelectionEvent e) -> {
             if (lstDeque.getSelectedValue() != null) {
                 btnAcessar.setEnabled(true);
@@ -57,11 +61,31 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         
+        // Carregar decks adicionados anteriormente:
+        int iterator = 0;
+        boolean verificador;
+        
+        do {
+            Deck deck = new Deck(user);
+            verificador = deck.carregarDeck(iterator);
+            if (verificador && deck.getNome() != null)
+                decks.add(deck);
+            ++iterator;
+        } while(verificador);
+        
         // Colocar os decks na tabela (Se foram adicionados anteriormente):
         lstDeque.setModel(mod);
         for(int i = 0; i < decks.size(); ++i) {
             mod.addElement(decks.get(i).getNome());
         }
+        
+        // limpar deck depois de fechar a janela
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                user.setDecks(new ArrayList<>());
+            }
+        });
         
     }
 
@@ -232,7 +256,6 @@ public class TelaInicial extends javax.swing.JFrame {
         // adicionar deque na lista se o usuário digitou algo
         lstDeque.setModel(mod);
         if (!txtAdicionar.getText().equals("") && txtAdicionar.getForeground() != Color.GRAY) {
-            lstDeque.setFixedCellHeight(30);
             String nomeDeck = txtAdicionar.getText().trim();
             
             // Adicionando data de criação:
@@ -241,7 +264,12 @@ public class TelaInicial extends javax.swing.JFrame {
             
             Data data = new Data(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY));
             
-            decks.add(new Deck(nomeDeck, data));
+            Deck newDeck = new Deck(nomeDeck, data);
+            newDeck.setUser(user);
+            newDeck.salvarDeck();
+            decks.add(newDeck);
+            
+            
             mod.addElement(nomeDeck);
             
         } else {
@@ -272,6 +300,8 @@ public class TelaInicial extends javax.swing.JFrame {
             if (!newitem.isEmpty()) {
                 mod.remove(index);
                 mod.add(index, newitem);
+                decks.get(index).modificarDeck(newitem, index);
+                decks.get(index).setNome(newitem);
                 lstDeque.getSelectionModel().setLeadSelectionIndex(index);
             }
         }
@@ -282,6 +312,8 @@ public class TelaInicial extends javax.swing.JFrame {
         if (dialogResult == JOptionPane.YES_OPTION){
             int index = lstDeque.getSelectionModel().getMaxSelectionIndex();
             mod.remove(index);
+            decks.get(index).apagarDeck(index); // apagar do arquivo
+            decks.remove(index);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 

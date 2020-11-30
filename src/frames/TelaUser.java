@@ -209,43 +209,47 @@ public class TelaUser extends javax.swing.JFrame {
         // índice do item selecionado
         int i = lstUsers.getSelectionModel().getMaxSelectionIndex();
 
-        javax.swing.JTextField tfValidar = new javax.swing.JTextField();
+        javax.swing.JPasswordField pfValidar = new javax.swing.JPasswordField();
         javax.swing.JTextField tfNome = new javax.swing.JTextField(users.get(i).getNome());
-        javax.swing.JTextField tfSenha = new javax.swing.JTextField(users.get(i).getSenha());
-        
+        javax.swing.JPasswordField pfSenha = new javax.swing.JPasswordField(users.get(i).getSenha());
         Object[] message = {
-            "Senha: ", tfValidar,
+            "Senha: ", pfValidar,
         };
+        pfValidar.setEchoChar('\u2022');
         
         int opt = JOptionPane.showConfirmDialog(null, message, "Insira a senha antiga:", JOptionPane.PLAIN_MESSAGE);
         
-        if(opt == JOptionPane.OK_OPTION && tfValidar.getText().equals(users.get(i).getSenha())) {
-            
-            Object[] message2 = {
-                "Nome: ", tfNome,
-                "Senha: ", tfSenha,
-            };
+        if(opt == JOptionPane.OK_OPTION ) {
+            if (pfValidar.getText().equals(users.get(i).getSenha())) {
+                Object[] message2 = {
+                    "Nome: ", tfNome,
+                    "Senha: ", pfSenha,
+                };
+                pfSenha.setEchoChar('\u2022');
 
-            int opt2 = JOptionPane.showConfirmDialog(null, message2, "Modificar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
+                int opt2 = JOptionPane.showConfirmDialog(null, message2, "Modificar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
 
-            if(opt2 == JOptionPane.OK_OPTION) {
-                String newNome = tfNome.getText();
-                String newSenha = tfSenha.getText();
+                if(opt2 == JOptionPane.OK_OPTION) {
+                    String newNome = tfNome.getText();
+                    String newSenha = pfSenha.getText();
 
-                if (newNome.equals("") || newSenha.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nO perfil não foi adicionado!",
-                        "Aviso", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    modUser.remove(i);
-                    modUser.add(i, newNome);
-                    
-                    users.get(i).modificar(newNome, newSenha);
+                    if (newNome.equals("") || newSenha.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nO perfil não foi adicionado!",
+                            "Aviso", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        modUser.remove(i);
+                        modUser.add(i, newNome);
+
+                        users.get(i).modificar(newNome, newSenha, i);
+                        users.get(i).setNome(newNome);
+                        users.get(i).setSenha(newSenha);
+                    }
                 }
-            }
-        } else {
+            } else {
             JOptionPane.showMessageDialog(null, "Senha inválida!",
                 "Aviso", JOptionPane.ERROR_MESSAGE);
-        }
+            }
+        } 
     }//GEN-LAST:event_btnModificarUserActionPerformed
 
     private void btnExcluirUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUserActionPerformed
@@ -264,17 +268,17 @@ public class TelaUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirUserActionPerformed
 
     private void btnEntrarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarUserActionPerformed
-        javax.swing.JPasswordField tfSenha = new javax.swing.JPasswordField();
+        javax.swing.JPasswordField pfSenha = new javax.swing.JPasswordField();
         int i = lstUsers.getSelectionModel().getMaxSelectionIndex();
 
         Object[] message = {
-            "Senha: ", tfSenha,
+            "Senha: ", pfSenha,
         };
-        tfSenha.setEchoChar('\u2022');
+        pfSenha.setEchoChar('\u2022');
         int option = JOptionPane.showConfirmDialog(null, message, "Digite a senha para acessar:", JOptionPane.PLAIN_MESSAGE);
 
         if(option == JOptionPane.OK_OPTION) {
-            if (tfSenha.getText().equals(users.get(i).getSenha())) {
+            if (pfSenha.getText().equals(users.get(i).getSenha())) {
                 TelaInicial telaInicial = new TelaInicial(users.get(i));
                 telaInicial.setVisible(true);
             } else { // Verificando se a senha colocada é a correta!
