@@ -20,7 +20,7 @@ public class Estudo {
     private Iterator<Card> it;  // para mostrar o próximo card na fila
     
     private Deck deck;
-    // numero de acertos em estudo
+    // numero de acertos no estudo (para a pontuação)
     private int numAcertos = 0;
     
     

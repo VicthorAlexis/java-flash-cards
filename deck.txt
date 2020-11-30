@@ -1,0 +1,6 @@
+Felipao;verbos;29/11/2020;2
+Felipao;nouns;29/11/2020;1
+Felipao;phrasal verbs;29/11/2020;0
+Joao;Deck 1;29/11/2020;0
+Joao;Deck 2;29/11/2020;0
+Felipao;Advérbios;30/11/2020;0

@@ -78,9 +78,9 @@ public class TelaUser extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstUsers = new javax.swing.JList<>();
         btnAdicionarUser = new javax.swing.JButton();
+        btnEntrarUser = new javax.swing.JButton();
         btnModificarUser = new javax.swing.JButton();
         btnExcluirUser = new javax.swing.JButton();
-        btnEntrarUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,10 +90,34 @@ public class TelaUser extends javax.swing.JFrame {
         lstUsers.setToolTipText("");
         jScrollPane2.setViewportView(lstUsers);
 
+        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
+        panelUser.setLayout(panelUserLayout);
+        panelUserLayout.setHorizontalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUserLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
+        );
+        panelUserLayout.setVerticalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         btnAdicionarUser.setText("Adicionar");
         btnAdicionarUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarUserActionPerformed(evt);
+            }
+        });
+
+        btnEntrarUser.setText("Entrar");
+        btnEntrarUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarUserActionPerformed(evt);
             }
         });
 
@@ -111,58 +135,37 @@ public class TelaUser extends javax.swing.JFrame {
             }
         });
 
-        btnEntrarUser.setText("Entrar");
-        btnEntrarUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntrarUserActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
-        panelUser.setLayout(panelUserLayout);
-        panelUserLayout.setHorizontalGroup(
-            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUserLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2)
-                    .addGroup(panelUserLayout.createSequentialGroup()
-                        .addComponent(btnAdicionarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEntrarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(btnExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39))
-        );
-        panelUserLayout.setVerticalGroup(
-            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelUserLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEntrarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(btnAdicionarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEntrarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnModificarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(435, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdicionarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEntrarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 111, Short.MAX_VALUE)))
         );
 
         pack();
@@ -209,43 +212,47 @@ public class TelaUser extends javax.swing.JFrame {
         // índice do item selecionado
         int i = lstUsers.getSelectionModel().getMaxSelectionIndex();
 
-        javax.swing.JTextField tfValidar = new javax.swing.JTextField();
+        javax.swing.JPasswordField pfValidar = new javax.swing.JPasswordField();
         javax.swing.JTextField tfNome = new javax.swing.JTextField(users.get(i).getNome());
-        javax.swing.JTextField tfSenha = new javax.swing.JTextField(users.get(i).getSenha());
-        
+        javax.swing.JPasswordField pfSenha = new javax.swing.JPasswordField(users.get(i).getSenha());
         Object[] message = {
-            "Senha: ", tfValidar,
+            "Senha: ", pfValidar,
         };
+        pfValidar.setEchoChar('\u2022');
         
         int opt = JOptionPane.showConfirmDialog(null, message, "Insira a senha antiga:", JOptionPane.PLAIN_MESSAGE);
         
-        if(opt == JOptionPane.OK_OPTION && tfValidar.getText().equals(users.get(i).getSenha())) {
-            
-            Object[] message2 = {
-                "Nome: ", tfNome,
-                "Senha: ", tfSenha,
-            };
+        if(opt == JOptionPane.OK_OPTION ) {
+            if (pfValidar.getText().equals(users.get(i).getSenha())) {
+                Object[] message2 = {
+                    "Nome: ", tfNome,
+                    "Senha: ", pfSenha,
+                };
+                pfSenha.setEchoChar('\u2022');
 
-            int opt2 = JOptionPane.showConfirmDialog(null, message2, "Modificar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
+                int opt2 = JOptionPane.showConfirmDialog(null, message2, "Modificar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
 
-            if(opt2 == JOptionPane.OK_OPTION) {
-                String newNome = tfNome.getText();
-                String newSenha = tfSenha.getText();
+                if(opt2 == JOptionPane.OK_OPTION) {
+                    String newNome = tfNome.getText();
+                    String newSenha = pfSenha.getText();
 
-                if (newNome.equals("") || newSenha.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nO perfil não foi adicionado!",
-                        "Aviso", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    modUser.remove(i);
-                    modUser.add(i, newNome);
-                    
-                    users.get(i).modificar(newNome, newSenha);
+                    if (newNome.equals("") || newSenha.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nO perfil não foi adicionado!",
+                            "Aviso", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        modUser.remove(i);
+                        modUser.add(i, newNome);
+
+                        users.get(i).modificar(newNome, newSenha, i);
+                        users.get(i).setNome(newNome);
+                        users.get(i).setSenha(newSenha);
+                    }
                 }
-            }
-        } else {
+            } else {
             JOptionPane.showMessageDialog(null, "Senha inválida!",
                 "Aviso", JOptionPane.ERROR_MESSAGE);
-        }
+            }
+        } 
     }//GEN-LAST:event_btnModificarUserActionPerformed
 
     private void btnExcluirUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUserActionPerformed
@@ -264,17 +271,17 @@ public class TelaUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirUserActionPerformed
 
     private void btnEntrarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarUserActionPerformed
-        javax.swing.JPasswordField tfSenha = new javax.swing.JPasswordField();
+        javax.swing.JPasswordField pfSenha = new javax.swing.JPasswordField();
         int i = lstUsers.getSelectionModel().getMaxSelectionIndex();
 
         Object[] message = {
-            "Senha: ", tfSenha,
+            "Senha: ", pfSenha,
         };
-        tfSenha.setEchoChar('\u2022');
+        pfSenha.setEchoChar('\u2022');
         int option = JOptionPane.showConfirmDialog(null, message, "Digite a senha para acessar:", JOptionPane.PLAIN_MESSAGE);
 
         if(option == JOptionPane.OK_OPTION) {
-            if (tfSenha.getText().equals(users.get(i).getSenha())) {
+            if (pfSenha.getText().equals(users.get(i).getSenha())) {
                 TelaInicial telaInicial = new TelaInicial(users.get(i));
                 telaInicial.setVisible(true);
             } else { // Verificando se a senha colocada é a correta!

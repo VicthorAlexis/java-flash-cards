@@ -1,0 +1,3 @@
+Felipao;verbos;shake;balançar;2;0;30/11/2020
+Felipao;verbos;twist;entortar;2;0;30/11/2020
+Felipao;nouns;ladle;concha;1;0;30/11/2020
