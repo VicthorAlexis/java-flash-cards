@@ -1,0 +1,6 @@
+Felipao;verbos;carry;carregar;0;1;29/11/2020
+Felipao;verbos;shake;balançar;0;1;29/11/2020
+Felipao;verbos;twist;entortar;0;0;29/11/2020
+Felipao;phrasal verbs;Look out;Cuidado;1;0;29/11/2020
+Joao;Deck 1;card 2;2;1;0;29/11/2020
+Joao;Deck 2;card 21;21;0;0;29/11/2020

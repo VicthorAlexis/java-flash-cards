@@ -6,9 +6,12 @@
 package frames;
 
 import flashcards.Card;
+import flashcards.Data;
 import flashcards.Deck;
 import flashcards.Estudo;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -56,10 +59,23 @@ public class TelaDeck extends javax.swing.JFrame {
                 setEnabledBtnLbl(true);
                 int index = lstCards.getSelectionModel().getMaxSelectionIndex();
                 setAcertoErroLabels(index);
+                lblMostraData.setText(deck.getCards().get(index).getData().imprimirData());
             } else {
                 setEnabledBtnLbl(false);
             }
         });
+        
+        // Carregar decks adicionados anteriormente:
+        int iterator = 0;
+        boolean verificador;
+        
+        do {
+            Card card = new Card(deck);
+            verificador = card.carregarCard(iterator);
+            if (verificador && card.getFrente() != null)
+                deck.addCard(card);
+            ++iterator;
+        } while(verificador);
         
         // adiciona cards na lista caso deck ja contenha card(s) ao abrir a telaDeck
         lstCards.setModel(mod);
@@ -71,6 +87,18 @@ public class TelaDeck extends javax.swing.JFrame {
                 btnEstudar.setEnabled(true);
             }
         }
+        
+
+        // salvar dados apenas ao fechar a janela para facilitar o processo de atualização
+        // do número de acertos e erros
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                deck.setCards(new ArrayList<>());   // limpar cards depois de fechar a janela
+            }
+        });
+        
+
     }
     
     // retorna o deck para atualizá-lo na lista de decks da telaInicial
@@ -128,7 +156,8 @@ public class TelaDeck extends javax.swing.JFrame {
         btnModificar.setEnabled(b);
         btnExcluir.setEnabled(b);
         lblData.setEnabled(b);
-        lblMostraData.setEnabled(b); lblMostraData.setText(this.deck.getData().imprimirData());
+        lblMostraData.setEnabled(b);
+        if (!b) lblMostraData.setText("DD/MM/AAAA");
         
         lblAcertos.setEnabled(b);
         lblErros.setEnabled(b);
@@ -795,7 +824,11 @@ public class TelaDeck extends javax.swing.JFrame {
                 mod.add(index, newFrente);
                 lstCards.getSelectionModel().setLeadSelectionIndex(index);
                 // atualiza valor no Card do Deck
-                deck.getCards().set(index, new Card(newFrente, newVerso));
+                deck.getCards().get(index).setFrente(newFrente);
+                deck.getCards().get(index).setVerso(newVerso);
+                deck.getCards().get(index).atualizaArquivo(index);
+
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos.\nCard não modificado.",
                             "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -809,7 +842,8 @@ public class TelaDeck extends javax.swing.JFrame {
         if (dialogResult == JOptionPane.YES_OPTION){
             int index = lstCards.getSelectionModel().getMaxSelectionIndex();
             mod.remove(index);
-            deck.getCards().remove(index);
+            deck.getCards().get(index).apagarCard(index); // apagar do arquivo
+            deck.getCards().remove(index); 
             if (mod.getSize() == 0) {
                 btnEstudar.setEnabled(false);
             }
@@ -858,12 +892,19 @@ public class TelaDeck extends javax.swing.JFrame {
         if (!txtFrente.getText().equals("") && txtFrente.getForeground() != Color.GRAY
             && !txtVerso.getText().equals("") && txtVerso.getForeground() != Color.GRAY) {
             
+            Calendar c = Calendar.getInstance();
+            Data data = new Data(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY));
+
+            
             String frente = txtFrente.getText().trim();
             String verso = txtVerso.getText().trim();
             mod.addElement(frente); // Só a frente vai aparecer na lista.
-            
-            deck.addCard(new Card(frente, verso));
             btnEstudar.setEnabled(true);
+            
+            Card newCard = new Card(frente, verso, data);
+            deck.addCard(newCard);
+            newCard.setDeck(deck);
+            newCard.salvarCard();
         } else {
             JOptionPane.showMessageDialog(null, "Um ou mais campos não preenchidos",
                         "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -910,8 +951,11 @@ public class TelaDeck extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCard2lblCard2MouseClicked
 
     // apertou o botao acertei ou o botao errei
-    private void apertaBotao() {
+    private void apertaAcerteiErrei() {
         if(!timer.isRunning()) timer.start();   // comecar a animacao
+        
+        // atualiza número no arquivo card.txt
+        estudo.getPrimeiroCard().atualizaArquivo(idxAtual);
         
         if (atualizaCard() != null) {
             mostraFrente2();
@@ -921,7 +965,7 @@ public class TelaDeck extends javax.swing.JFrame {
     
     private void btnErreiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErreiActionPerformed
         estudo.errei(); // atualiza numero de erros
-        apertaBotao();
+        apertaAcerteiErrei();
     }//GEN-LAST:event_btnErreiActionPerformed
 
     private void lblCard1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCard1MouseClicked
@@ -959,7 +1003,7 @@ public class TelaDeck extends javax.swing.JFrame {
 
     private void btnAcerteiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcerteiActionPerformed
         estudo.acertei(); // atualiza numero de acertos
-        apertaBotao();
+        apertaAcerteiErrei();
     }//GEN-LAST:event_btnAcerteiActionPerformed
 
     private void btnAcerteiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcerteiMousePressed
