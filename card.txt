@@ -1,3 +1,4 @@
-Felipao;verbos;shake;balançar;2;0;30/11/2020
-Felipao;verbos;twist;entortar;2;0;30/11/2020
-Felipao;nouns;ladle;concha;1;0;30/11/2020
+Felipe;verbos;twist;entortar;11;10;29/11/2020
+Felipe;verbos;carry;carregar;12;9;29/11/2020
+Felipe;verbos;Área do círculo;pi*r^2;3;4;30/11/2020
+Felipe;verbos;shake;balançar;14;7;29/11/2020

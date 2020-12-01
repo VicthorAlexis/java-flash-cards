@@ -5,6 +5,7 @@
  */
 package flashcards;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,31 +15,32 @@ import java.util.Queue;
  * @author felip
  */
 public class Estudo {
-    private final Queue<Card> filaCards; // fila de cards do deck
+    private Queue<Card> filaCards; // fila de cards do deck
+    // fila para o próximo estudo (com a nova ordem de cards definida pelos acertos)
+    private Queue<Card> proximaFila;
     private Card primeiroCard;  // card atual
-    private int[] ordemCards;   // TODO controlar a ordem dos cards no deck
-    private Iterator<Card> it;  // para mostrar o próximo card na fila
+    private Iterator<Card> iterator;  // iterator para mostrar o próximo card na fila
+    private int numAcertos = 0; // numero de acertos no estudo (para a pontuação)
     
     private Deck deck;
-    // numero de acertos no estudo (para a pontuação)
-    private int numAcertos = 0;
-    
-    
+
     public Estudo(Deck deck) {
         this.deck = deck;
         filaCards = new LinkedList<>(deck.getCards());
-        it = filaCards.iterator();
+        proximaFila = new LinkedList<>(deck.getCards());
+        iterator = filaCards.iterator();
     }
     
     // retorna o próximo card do deck
     public Card proximoCard() {
-        if (it.hasNext()) {
-            primeiroCard = it.next();
+        if (iterator.hasNext()) {
+            primeiroCard = iterator.next();
             return primeiroCard;
         }
         return null;
     }
     
+    // retorna o card à mostra
     public Card getPrimeiroCard() {
         return primeiroCard;
     }
@@ -47,6 +49,16 @@ public class Estudo {
     public void acertei() {
         numAcertos += 1;
         primeiroCard.setNumAcertos(primeiroCard.getNumAcertos() + 1);
+        
+        // se acertou, realocar para o fim da fila de cards
+        Card cardAcertou = proximaFila.remove();
+        proximaFila.add(cardAcertou);
+    }
+    
+    // retorna a lista atualizada de cards
+    public ArrayList<Card> novaOrdemCards() {
+        deck.setCards(new ArrayList<>(proximaFila));
+        return deck.getCards();
     }
     
     // incrementa o número de erros do card à mostra e do estuo

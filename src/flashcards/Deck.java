@@ -78,6 +78,9 @@ public class Deck {
             // imprimir no arquivo temp.txt sem o usuário deletado
             while (scanDeck.hasNext()) {
                 currentLine = scanDeck.nextLine();
+                String[] divisores = currentLine.split(";");
+                if (divisores[0].equals(user.getNome()) == false) index += 1;
+                
                 if (count != index) // pular usuário excluído
                     psTemp.print(currentLine + System.getProperty("line.separator"));
                 ++count;
@@ -91,6 +94,8 @@ public class Deck {
                 psUser.print(currentLine + System.getProperty("line.separator"));
                 ++count;
             }
+            
+            atualizarCard(getNome(), "");   // apagar cards desse deck
             
             psTemp.close();
             psUser.close();
@@ -117,21 +122,24 @@ public class Deck {
             
             do {
                 linha = br.readLine();
-                if(contador == index && linha != null) {
+                if (linha != null) {
                     String[] divisoes = linha.split(";");
-                    if (divisoes[0].equals(this.user.getNome())) {
-                        // Carregar os atributos de deck separadamente:
-                        this.setNome(divisoes[1]);
-                        /*Adicionando data de criação: */
-                        dataAuxiliar.setDataComString(divisoes[2]);
-                        this.setData(dataAuxiliar);
-                        this.getData().imprimirData();
-                        this.cards = new ArrayList();
-                        this.setVezesEstudadas(Integer.parseInt(divisoes[3]));
+                    if (divisoes[0].equals(user.getNome()) == false) index += 1;
+                    if(contador == index) {
+                        if (divisoes[0].equals(this.user.getNome())) {
+                            // Carregar os atributos de deck separadamente:
+                            this.setNome(divisoes[1]);
+                            /*Adicionando data de criação: */
+                            dataAuxiliar.setDataComString(divisoes[2]);
+                            this.setData(dataAuxiliar);
+                            this.getData().imprimirData();
+                            this.cards = new ArrayList();
+                            this.setVezesEstudadas(Integer.parseInt(divisoes[3]));
+                        }
+                        arq.close();
+                        input.close();
+                        return true;
                     }
-                    arq.close();
-                    input.close();
-                    return true;
                 }
                 ++contador;
             }while(linha != null);
@@ -144,7 +152,7 @@ public class Deck {
     }
     
     // renomeia o deck no arquivo deck.txt
-    public void modificarDeck(String novoNome, int index, int tipo) {
+    public void atualizaArquivo(String novoNome, int index, int tipo) {
         try{
             File deckFile = new File("deck.txt");
             File temp = new File("tempDeck.txt");
@@ -158,16 +166,19 @@ public class Deck {
             // imprimir no arquivo temp.txt com as modificações feitas
             while (scanDeck.hasNext()) {
                 currentLine = scanDeck.nextLine();
+                String[] divisores = currentLine.split(";");
+                if (divisores[0].equals(user.getNome()) == false) index += 1;
+                
                 if (count != index)
                     psTemp.print(currentLine + System.getProperty("line.separator"));
                 else {
                     if(tipo == 1) {
-                        String[] divisores = currentLine.split(";");
+                        divisores = currentLine.split(";");
                         psTemp.print(divisores[0] + ";" + novoNome + ";" + 
                             divisores[2] + ";" + divisores[3] + System.getProperty("line.separator"));
                 
                     } else if(tipo == 2) {
-                        String[] divisores = currentLine.split(";");
+                        divisores = currentLine.split(";");
                         psTemp.print(divisores[0] + ";" + divisores[1] + ";" + 
                             divisores[2] + ";" + novoNome + System.getProperty("line.separator"));
                     }
@@ -210,18 +221,27 @@ public class Deck {
             Scanner scanUser = new Scanner(cardFile);
             String currentLine;
 
-            // imprimir no arquivo temp.txt sem o usuário deletado
-            while (scanUser.hasNext()) {
-                currentLine = scanUser.nextLine();
-                String[] divisoes = currentLine.split(";");
-                System.out.println(divisoes[1]);
-                
-                if (divisoes[1].equals(antigoNome)) { // copiar
-                    psTemp.print(divisoes[0] + ";" + novoNome + ";" + divisoes[2] + ";" + divisoes[3] + ";"
-                            + divisoes[4] + ";" + divisoes[5] + ";" + divisoes[6] + ";" + System.getProperty("line.separator"));
+            if (!novoNome.equals("")) {
+                // imprimir no arquivo tempDeck.txt comm o usuário modificado
+                while (scanUser.hasNext()) {
+                    currentLine = scanUser.nextLine();
+                    String[] divisoes = currentLine.split(";");
+
+                    if (divisoes[1].equals(antigoNome)) { // copiar
+                        psTemp.print(divisoes[0] + ";" + novoNome + ";" + divisoes[2] + ";" + divisoes[3] + ";"
+                                + divisoes[4] + ";" + divisoes[5] + ";" + divisoes[6] + ";" + System.getProperty("line.separator"));
+                    }
+                    else
+                        psTemp.print(currentLine + System.getProperty("line.separator"));
                 }
-                else
-                    psTemp.print(currentLine + System.getProperty("line.separator"));
+            } else {    // apagar card do card antigoNome
+                while (scanUser.hasNext()) {
+                    currentLine = scanUser.nextLine();
+                    String[] divisoes = currentLine.split(";");
+
+                    if (!divisoes[1].equals(antigoNome)) // pular card excluido
+                        psTemp.print(currentLine + System.getProperty("line.separator"));
+                }
             }
             
             Scanner scanTemp = new Scanner(temp);

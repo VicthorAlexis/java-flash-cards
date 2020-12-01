@@ -74,45 +74,23 @@ public class TelaUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelUser = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lstUsers = new javax.swing.JList<>();
-        btnAdicionarUser = new javax.swing.JButton();
+        panelBotoes = new javax.swing.JPanel();
         btnEntrarUser = new javax.swing.JButton();
         btnModificarUser = new javax.swing.JButton();
         btnExcluirUser = new javax.swing.JButton();
+        btnAdicionarUser = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        panelUser = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstUsers = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Users");
+        setBackground(new java.awt.Color(245, 245, 245));
+        setResizable(false);
 
-        panelUser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Perfis de usuário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
-        panelUser.setName(""); // NOI18N
-
-        lstUsers.setToolTipText("");
-        jScrollPane2.setViewportView(lstUsers);
-
-        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
-        panelUser.setLayout(panelUserLayout);
-        panelUserLayout.setHorizontalGroup(
-            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUserLayout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
-        );
-        panelUserLayout.setVerticalGroup(
-            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelUserLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        btnAdicionarUser.setText("Adicionar");
-        btnAdicionarUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarUserActionPerformed(evt);
-            }
-        });
+        panelBotoes.setBackground(new java.awt.Color(255, 255, 255));
+        panelBotoes.setName(""); // NOI18N
 
         btnEntrarUser.setText("Entrar");
         btnEntrarUser.addActionListener(new java.awt.event.ActionListener() {
@@ -135,12 +113,19 @@ public class TelaUser extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+        btnAdicionarUser.setText("Adicionar");
+        btnAdicionarUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarUserActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBotoesLayout = new javax.swing.GroupLayout(panelBotoes);
+        panelBotoes.setLayout(panelBotoesLayout);
+        panelBotoesLayout.setHorizontalGroup(
+            panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotoesLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addComponent(btnAdicionarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,24 +133,76 @@ public class TelaUser extends javax.swing.JFrame {
                 .addComponent(btnModificarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(435, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        panelBotoesLayout.setVerticalGroup(
+            panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotoesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(panelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEntrarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificarUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluirUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(245, 245, 245));
+
+        panelUser.setBackground(new java.awt.Color(245, 245, 245));
+        panelUser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Perfis de usuário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        panelUser.setName(""); // NOI18N
+
+        lstUsers.setToolTipText("");
+        jScrollPane2.setViewportView(lstUsers);
+
+        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
+        panelUser.setLayout(panelUserLayout);
+        panelUserLayout.setHorizontalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUserLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+        panelUserLayout.setVerticalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 111, Short.MAX_VALUE)))
+                .addComponent(panelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 112, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 386, Short.MAX_VALUE)
+                    .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -184,7 +221,8 @@ public class TelaUser extends javax.swing.JFrame {
         };
         tfSenha.setEchoChar('\u2022');
 
-        int option = JOptionPane.showConfirmDialog(null, message, "Adicionar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
+        int option = JOptionPane.showConfirmDialog(null, message,
+                "Adicionar perfil de usuário", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if(option == JOptionPane.OK_OPTION) {
             String nome = tfNome.getText();
@@ -230,7 +268,8 @@ public class TelaUser extends javax.swing.JFrame {
                 };
                 pfSenha.setEchoChar('\u2022');
 
-                int opt2 = JOptionPane.showConfirmDialog(null, message2, "Modificar perfil de usuário", JOptionPane.PLAIN_MESSAGE);
+                int opt2 = JOptionPane.showConfirmDialog(null, message2, 
+                        "Modificar perfil de usuário", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
                 if(opt2 == JOptionPane.OK_OPTION) {
                     String newNome = tfNome.getText();
@@ -265,7 +304,7 @@ public class TelaUser extends javax.swing.JFrame {
             // Tirar do ArrayList
             User userRemove = users.get(index);
             users.remove(index);
-            userRemove.apagarUser(index);
+            userRemove.apagarUser(index);   // apagar do arquivo
             
         }
     }//GEN-LAST:event_btnExcluirUserActionPerformed
@@ -282,8 +321,8 @@ public class TelaUser extends javax.swing.JFrame {
 
         if(option == JOptionPane.OK_OPTION) {
             if (pfSenha.getText().equals(users.get(i).getSenha())) {
-                TelaInicial telaInicial = new TelaInicial(users.get(i));
-                telaInicial.setVisible(true);
+                TelaDeck telaDeck = new TelaDeck(users.get(i));
+                telaDeck.setVisible(true);
             } else { // Verificando se a senha colocada é a correta!
                 JOptionPane.showMessageDialog(null, "Senha inválida!",
                     "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -331,8 +370,10 @@ public class TelaUser extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrarUser;
     private javax.swing.JButton btnExcluirUser;
     private javax.swing.JButton btnModificarUser;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lstUsers;
+    private javax.swing.JPanel panelBotoes;
     private javax.swing.JPanel panelUser;
     // End of variables declaration//GEN-END:variables
 }
